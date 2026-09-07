@@ -1,4 +1,4 @@
-import { mkdir, readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, copyFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import vm from 'node:vm';
 import path from 'node:path';
@@ -15,4 +15,5 @@ await check('api');
 const html = await readFile('03_engine/ui/index.html', 'utf8');
 for (const script of html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)) new vm.Script(script[1]);
 await mkdir('public', { recursive: true });
+await copyFile('03_engine/ui/index.html', 'public/index.html');
 console.log('Build passed: server and browser JavaScript syntax checked; Vercel function entry ready.');
