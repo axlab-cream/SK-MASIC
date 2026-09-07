@@ -6,7 +6,8 @@
 - 새 비공개 Blob 저장소 `sk-masic` (icn1) 생성·연결 완료.
 - 서버리스 실행부, Chromium, 브라우저별 보관함·배너 영구 저장 구현.
 - 빌드·회귀 테스트 3건 통과. 실제 Blob PNG 저장/조회, 동시 저장 2건, 즐겨찾기 유지, 방문자 분리 확인.
-- Production Git 자동 배포 및 실화면 확인 진행 중.
+- Production Git 자동 배포 Ready: https://sk-masic.vercel.app
+- 실서비스 전체 스타일 5종 QA 통과(1종 정상 제외), 출력 규격 4종 통과, PNG 조회·동시 저장·즐겨찾기·방문자 분리 통과. 최신 코드 배포 오류 로그 0건.
 
 > 상태: `TODO` / `DOING` / `DONE` / `BLOCKED`
 > 작업을 마치면 이 파일의 상태를 갱신한다. 새 작업은 해당 Phase 아래에 추가한다.
