@@ -5,6 +5,8 @@
   "type": "module",
   "description": "SK매직 카카오톡 배너 자동생성기 — MC용",
   "scripts": {
+    "build": "node 03_engine/build.mjs",
+    "test": "node --test 03_engine/storage.test.mjs",
     "start": "node 03_engine/server.mjs",
     "ui": "node 03_engine/server.mjs",
     "verify": "node 03_engine/verify.mjs",
@@ -17,6 +19,8 @@
     "trim": "node 03_engine/catalog/trim.mjs"
   },
   "dependencies": {
+    "@sparticuz/chromium": "149.0.0",
+    "@vercel/blob": "2.8.0",
     "playwright": "^1.49.0"
   }
 }

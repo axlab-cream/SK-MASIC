@@ -1,0 +1,13 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "regions": ["icn1"],
+  "functions": {
+    "api/index.mjs": {
+      "maxDuration": 300,
+      "memory": 2048,
+      "includeFiles": "{03_engine/**,02_data/assets/trimmed/**,02_data/catalog/*.json,01_spec/assets/logo/**,node_modules/@sparticuz/chromium/bin/**}"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+}

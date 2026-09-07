@@ -1,5 +1,13 @@
 # TASKS
 
+## 2026-09-07 · axlab 공유 프로젝트 배포
+
+- GitHub 공개 저장소 및 Vercel Git 연동 완료.
+- 새 비공개 Blob 저장소 `sk-masic` (icn1) 생성·연결 완료.
+- 서버리스 실행부, Chromium, 브라우저별 보관함·배너 영구 저장 구현.
+- 빌드·회귀 테스트 3건 통과. 실제 Blob PNG 저장/조회, 동시 저장 2건, 즐겨찾기 유지, 방문자 분리 확인.
+- Production Git 자동 배포 및 실화면 확인 진행 중.
+
 > 상태: `TODO` / `DOING` / `DONE` / `BLOCKED`
 > 작업을 마치면 이 파일의 상태를 갱신한다. 새 작업은 해당 Phase 아래에 추가한다.
 

@@ -7,15 +7,24 @@ import { buildHtml } from './template.mjs';
 import { SIZES } from '../layout/spec.mjs';
 
 let browser = null;
+let launching = null;
 
 // 컨테이너/서버에 이미 설치된 Chromium 을 쓰도록 경로를 허용한다.
 // PLAYWRIGHT_CHROMIUM_PATH 가 있으면 그것을, 없으면 playwright 기본 번들을 쓴다.
 export async function getBrowser() {
-  if (browser) return browser;
+  if (browser?.isConnected()) return browser;
+  if (launching) return launching;
   const opts = { args: ['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'] };
-  if (process.env.PLAYWRIGHT_CHROMIUM_PATH) opts.executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH;
-  browser = await chromium.launch(opts);
-  return browser;
+  launching = (async () => {
+    if (process.env.VERCEL === '1' && process.platform === 'linux') {
+      const { default: serverChromium } = await import('@sparticuz/chromium');
+      opts.args = [...serverChromium.args, ...opts.args];
+      opts.executablePath = await serverChromium.executablePath();
+    } else if (process.env.PLAYWRIGHT_CHROMIUM_PATH) opts.executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH;
+    browser = await chromium.launch(opts);
+    return browser;
+  })();
+  try { return await launching; } finally { launching = null; }
 }
 export async function closeBrowser() { if (browser) { await browser.close(); browser = null; } }
 

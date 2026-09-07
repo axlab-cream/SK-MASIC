@@ -28,6 +28,16 @@ npm run catalog           # 02_data/catalog/products.json 생성
 npm run dev               # MC UI
 ```
 
+## 웹 배포
+
+- GitHub: `axlab-cream/SK-MASIC`의 `main` 푸시로 Vercel `ax-lab-cream/sk-masic` 자동 배포.
+- 전용 Vercel Blob `sk-masic`: 서울 리전, 비공개. Production/Preview에 저장소 토큰 자동 연결.
+- Vercel에서는 서버리스 Chromium으로 생성 후 통과한 PNG만 Blob에 저장한다. 기존 상품 사진은 저장소에 재업로드하지 않는다.
+- 보관함과 배너 접근은 HttpOnly 쿠키로 브라우저별 분리된다. 같은 브라우저에서 새로고침 후 유지되며, 쿠키 삭제·다른 기기에서는 공유되지 않는다.
+- 로컬 `npm start`는 기존 파일 저장 방식을 유지한다. 기존 로컬 보관함은 자동 업로드하지 않는다.
+- `npm run build`: 서버·브라우저 JavaScript 구문 검증. `npm test`: 저장·조회와 요청 검증 회귀 테스트.
+- OpenAI 키와 공식 로고는 별도 준비 항목이며 현재 규칙 문구·기존 로고 자리표시자로 동작한다.
+
 ## 참고
 
 - 디자인 캔버스(와이어프레임 + 디자인 시스템): claude.ai 아티팩트로 별도 관리
