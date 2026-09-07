@@ -158,7 +158,7 @@ export async function handler(req, res) {
     res.writeHead(404); res.end('not found');
   } catch (e) {
     const status = e.statusCode || 500;
-    if (status === 500) console.error('Request failed:', e.name);
+    if (status === 500) console.error('Request failed:', e.name, (e.stack || '').split('\n').filter(line => line.trim().startsWith('at ')).slice(0, 4).join('\n'));
     json(res, status, { error: status === 500 ? '처리 중 오류가 발생했습니다. 다시 시도해주세요.' : e.message });
   } finally {
     if (temporaryDir) await rm(temporaryDir, { recursive: true, force: true });
