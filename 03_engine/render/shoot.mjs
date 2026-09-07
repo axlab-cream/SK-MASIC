@@ -8,6 +8,7 @@ import { SIZES } from '../layout/spec.mjs';
 
 let browser = null;
 let launching = null;
+let renderContext = null;
 
 // 컨테이너/서버에 이미 설치된 Chromium 을 쓰도록 경로를 허용한다.
 // PLAYWRIGHT_CHROMIUM_PATH 가 있으면 그것을, 없으면 playwright 기본 번들을 쓴다.
@@ -22,18 +23,23 @@ export async function getBrowser() {
       opts.executablePath = await serverChromium.executablePath();
     } else if (process.env.PLAYWRIGHT_CHROMIUM_PATH) opts.executablePath = process.env.PLAYWRIGHT_CHROMIUM_PATH;
     browser = await chromium.launch(opts);
+    // Serverless Chromium runs in one process; keep its context alive between pages.
+    renderContext = process.env.VERCEL === '1' && process.platform === 'linux'
+      ? await browser.newContext({ deviceScaleFactor: 1 }) : null;
     return browser;
   })();
   try { return await launching; } finally { launching = null; }
 }
-export async function closeBrowser() { if (browser) { await browser.close(); browser = null; } }
+export async function closeBrowser() { if (browser) { await browser.close(); browser = null; renderContext = null; } }
 
 // 고정 뷰포트에서 렌더 — MC 기기 화면 크기와 무관하게 동일 결과 (DECISIONS D-01)
 export async function shoot(opts) {
   const size = SIZES[opts.sizeKey];
   const html = buildHtml(opts);
   const b = await getBrowser();
-  const page = await b.newPage({ viewport: { width: size.w, height: size.h }, deviceScaleFactor: 1 });
+  const page = renderContext ? await renderContext.newPage()
+    : await b.newPage({ viewport: { width: size.w, height: size.h }, deviceScaleFactor: 1 });
+  if (renderContext) await page.setViewportSize({ width: size.w, height: size.h });
   const errors = [];
   page.on('pageerror', e => errors.push(String(e)));
 
