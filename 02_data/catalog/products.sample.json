@@ -1,0 +1,31 @@
+{
+  "syncedAt": "2026-09-07T06:10:00+09:00",
+  "source": "https://www.skmagic.com — pattern crawl (샘플. 실제 값은 crawl 후 교체)",
+  "note": "PoC용 샘플. 가격·프로모션은 예시값이며 실제 발송 전 반드시 재수집해야 한다.",
+  "products": [
+    { "goodsId": "G000069846", "model": "WPUIAC506SNW", "name": "MEGA ICE 얼음정수기",
+      "kind": "purifier", "ice": true, "care": "방문관리", "feature": "냉온정얼음", "color": "내추럴 화이트",
+      "term": 5, "base": 56900, "sale": 26950, "rating": 5.0, "reviews": 217,
+      "promo": ["반값", "18개월"], "image": null },
+    { "goodsId": "G000069931", "model": "ACL-201Q", "name": "올클린 공기청정기 20평",
+      "kind": "air", "care": "셀프관리", "feature": "4단 필터", "color": "화이트",
+      "term": 5, "base": 42900, "sale": 19900, "rating": 4.9, "reviews": 439,
+      "promo": ["신제품"], "image": null },
+    { "goodsId": "G000069282", "model": "BID-A300C", "name": "트리플케어 비데",
+      "kind": "bidet", "care": "방문관리", "feature": "3단 온수", "color": "화이트",
+      "term": 5, "base": 32900, "sale": 15850, "rating": 4.8, "reviews": 128,
+      "promo": [], "image": null },
+    { "goodsId": "G000069986", "model": "DWA-12MW", "name": "터치터치 식기세척기 12인",
+      "kind": "dish", "care": "셀프관리", "feature": "고온살균", "color": "화이트",
+      "term": 5, "base": 51900, "sale": 24900, "rating": 4.7, "reviews": 96,
+      "promo": ["사은품"], "image": null },
+    { "goodsId": "G000062998", "model": "ERA-BH400", "name": "터치 4구 전기레인지",
+      "kind": "range", "care": "셀프관리", "feature": "잔열표시", "color": "블랙",
+      "term": 5, "base": 44900, "sale": 21900, "rating": 4.8, "reviews": 61,
+      "promo": [], "image": null },
+    { "goodsId": "G000068821", "model": "MB-Q220", "name": "모션베드 매트리스 Q",
+      "kind": "bed", "care": "방문관리", "feature": "3단 모션", "color": "라이트 그레이",
+      "term": 5, "base": 79900, "sale": 39900, "rating": 4.9, "reviews": 44,
+      "promo": [], "image": null }
+  ]
+}

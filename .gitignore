@@ -1,0 +1,14 @@
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+99_scratch/
+04_output/*
+!04_output/README.md
+02_data/library.json
+02_data/raw/
+02_data/override.csv
+*.log
+Thumbs.db
+.DS_Store

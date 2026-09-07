@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SK매직 카톡 배너 생성기 · MC</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23EA1738'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Roboto';font-weight:400;font-display:swap;src:url('/fonts/roboto-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Roboto';font-weight:500;font-display:swap;src:url('/fonts/roboto-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Roboto';font-weight:700;font-display:swap;src:url('/fonts/roboto-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Noto Sans KR';font-weight:400;font-display:swap;src:url('/fonts/noto-sans-kr-korean-400-normal.woff2') format('woff2');unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7A3,U+D7B0-D7FF,U+3000-303F,U+FF00-FFEF}
+@font-face{font-family:'Noto Sans KR';font-weight:500;font-display:swap;src:url('/fonts/noto-sans-kr-korean-500-normal.woff2') format('woff2');unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7A3,U+D7B0-D7FF,U+3000-303F,U+FF00-FFEF}
+@font-face{font-family:'Noto Sans KR';font-weight:700;font-display:swap;src:url('/fonts/noto-sans-kr-korean-700-normal.woff2') format('woff2');unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7A3,U+D7B0-D7FF,U+3000-303F,U+FF00-FFEF}
+:root{
+  --red:#EA1738; --red-deep:#D9002B; --benefit:#EBFF00; --ice:#BFEAFF;
+  --black:#151515; --ink:#222222; --g700:#4B4B4B; --g600:#666666; --g500:#8A8A8A; --g300:#C8C8C8;
+  --line:#E5E5E5; --surface:#F6F6F6; --soft:#FAFAFA; --white:#fff; --ok:#0B7A53;
+  --r1:2px; --r2:12px; --r3:24px;
+  --sh1:0 1px 2px rgba(17,17,17,.06); --sh2:0 -2px 12px rgba(17,17,17,.08);
+  --bar:0px;
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--soft);color:var(--ink);font-family:"Roboto","Noto Sans KR",Arial,sans-serif;
+  font-size:14px;line-height:1.6;letter-spacing:-.035em;-webkit-font-smoothing:antialiased}
+button{font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;max-width:100%}
+.wrap{max-width:760px;margin:0 auto;min-height:100%;background:var(--soft);
+  display:flex;flex-direction:column;padding-bottom:calc(64px + var(--bar))}
+
+/* 헤더 · 진행 */
+header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--line);
+  padding:0 20px;height:56px;display:flex;align-items:center;gap:10px}
+.logo{width:26px;height:26px;border:1px dashed var(--g300);border-radius:var(--r1);flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--g500);letter-spacing:.04em}
+h1{font-size:15px;font-weight:700;letter-spacing:-.04em}
+.hsub{font-size:11px;color:var(--g500);letter-spacing:0}
+.prog{position:sticky;top:56px;z-index:19;background:var(--white);border-bottom:1px solid var(--line);padding:10px 20px 12px}
+.prow{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.pbadge{background:var(--red);color:#fff;font-size:11.5px;font-weight:700;padding:3px 7px;border-radius:var(--r1)}
+.pbadge.done{background:#E7F3EE;color:var(--ok)}
+.ptitle{font-size:13px;font-weight:700}
+.pnext{margin-left:auto;font-size:12px;color:var(--g500)}
+.bar{height:4px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:4px;background:var(--red);border-radius:99px;transition:width .22s ease-out}
+
+main{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:18px}
+.sec{display:flex;flex-direction:column;gap:10px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g500)}
+.cap{font-size:12px;color:var(--g600)}
+.note{border-radius:var(--r2);padding:12px 14px;display:flex;gap:10px;font-size:13px;line-height:1.55}
+.note.g{background:var(--surface);color:var(--g700)} .note.r{background:#FDECEF;color:#A50E27}
+.note.y{background:#FBFFCC;color:#4B4B00} .note.o{background:#E7F3EE;color:#07583C}
+
+/* 세그먼트 · 칩 */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:150px;z-index:60;max-width:min(420px,88vw);
+  background:var(--black);color:#fff;font-size:13.5px;line-height:1.5;padding:12px 16px;border-radius:var(--r2);
+  box-shadow:0 12px 30px rgba(17,17,17,.24);opacity:0;transition:opacity .18s}
+.toast.on{opacity:1}
+.seg{display:flex;background:var(--surface);border-radius:var(--r2);padding:3px}
+.seg button{flex:1;padding:11px 6px;font-size:13.5px;color:var(--g600);border-radius:10px}
+.seg button[aria-pressed="true"]{background:var(--white);color:var(--black);font-weight:700;box-shadow:var(--sh1)}
+.chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:40px;padding:0 15px;border:1px solid var(--line);border-radius:var(--r2);
+  background:var(--white);color:var(--g700);font-size:13.5px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip[aria-pressed="true"]{border:1.5px solid var(--red);color:var(--red);font-weight:700}
+.chip:disabled{background:var(--surface);color:var(--g300)}
+
+/* 상품 그리드 */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r2);overflow:hidden;text-align:left;
+  display:flex;flex-direction:column;position:relative}
+.pcard[aria-pressed="true"]{border:1.5px solid var(--red)}
+.pimg{background:var(--surface);height:104px;display:flex;align-items:center;justify-content:center;position:relative}
+.pbody{padding:11px;display:flex;flex-direction:column;gap:5px}
+.pmodel{font-size:11px;color:var(--g600);letter-spacing:0}
+.pname{font-size:14.5px;font-weight:700;line-height:1.35;letter-spacing:-.035em}
+.pattr{font-size:11.5px;color:var(--g600)}
+.pbase{font-size:11.5px;color:var(--g500);text-decoration:line-through}
+.psale{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.chk{position:absolute;left:9px;bottom:9px;width:24px;height:24px;border:1px solid var(--g300);
+  border-radius:var(--r1);background:var(--white);display:flex;align-items:center;justify-content:center}
+.pcard[aria-pressed="true"] .chk{background:var(--red);border-color:var(--red)}
+.pimg img{max-width:84%;max-height:84%;object-fit:contain;display:block}
+.chip.sm{min-height:32px;padding:0 11px;font-size:12.5px}
+.tag.warn{background:#FBFFCC;color:#4B4B00;font-weight:700}
+.bdg{position:absolute;font-size:11px;font-weight:700;padding:3px 6px;border-radius:var(--r1)}
+.bdg.red{background:var(--red-deep);color:#fff} .bdg.dark{background:var(--black);color:#fff}
+.bdg.ice{background:var(--ice);color:var(--ink)} .bdg.yel{background:var(--benefit);color:var(--black)}
+.tagrow{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:700;padding:3px 6px;border-radius:var(--r1);background:var(--surface);color:var(--g600)}
+.tag.ok{background:#E7F3EE;color:var(--ok)} .tag.red{background:var(--red-deep);color:#fff}
+
+/* 문구 후보 */
+.copycard{background:var(--white);border:1px solid var(--line);border-radius:var(--r2);padding:15px;
+  display:flex;flex-direction:column;gap:9px;text-align:left;width:100%}
+.copycard[aria-pressed="true"]{border:1.5px solid var(--red)}
+.rad{width:22px;height:22px;border:1px solid var(--g300);border-radius:99px;flex:none}
+.copycard[aria-pressed="true"] .rad,.scard[aria-pressed="true"] .rad{border:7px solid var(--red)}
+.hl{font-size:19px;font-weight:700;line-height:1.3;letter-spacing:-.045em}
+.sl{font-size:13.5px;color:var(--g600)}
+.ctachip{background:var(--red);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:var(--r2);display:inline-block}
+
+/* 스타일 시안 */
+.styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:640px){.styles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.scard{background:var(--white);border:1px solid var(--line);border-radius:var(--r2);padding:11px;
+  display:flex;flex-direction:column;gap:9px;text-align:left}
+.scard[aria-pressed="true"]{border:1.5px solid var(--red)}
+.sthumb{background:var(--surface);border-radius:var(--r1);padding:9px;display:flex;justify-content:center}
+.sthumb img{border:1px solid var(--line)}
+.srow{display:flex;align-items:center;gap:7px}
+.sname{font-size:14px;font-weight:700}
+
+/* 다운로드 */
+.dl{background:var(--white);border:1px solid var(--line);border-radius:var(--r2);padding:12px;
+  display:flex;gap:12px;align-items:center}
+.dlthumb{flex:none;background:var(--surface);border-radius:var(--r1);padding:6px;display:flex}
+.dlthumb img{border:1px solid var(--line);max-height:96px;width:auto}
+.ta{background:var(--white);border:1px solid var(--g300);border-radius:var(--r2);padding:13px;
+  font:inherit;letter-spacing:inherit;width:100%;min-height:150px;resize:vertical;color:var(--ink)}
+
+/* 버튼 */
+.btn{min-height:48px;padding:0 20px;border-radius:var(--r2);background:var(--red);color:#fff;
+  font-size:15px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  box-shadow:var(--sh1)}
+.btn.dark{background:var(--black)} .btn.line{background:var(--white);color:var(--black);border:1px solid var(--black);font-weight:500}
+.btn.gho{background:var(--white);color:var(--g700);border:1px solid var(--line);font-weight:500;box-shadow:none}
+.btn:disabled{background:var(--surface);color:var(--g500);border:1px solid var(--line);box-shadow:none;cursor:default}
+.btn.sm{min-height:36px;font-size:13px;padding:0 13px}
+
+/* 하단 고정 · 탭 */
+.fixed{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--white);border-top:1px solid var(--line);
+  box-shadow:var(--sh2)}
+.fixed .inner{max-width:760px;margin:0 auto}
+.actions{padding:10px 20px;display:flex;gap:9px;align-items:center}
+.tabs{display:flex;padding:6px 6px 4px;border-top:1px solid var(--line)}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;font-size:10.5px;color:var(--g500)}
+.tabs button[aria-pressed="true"]{color:var(--red);font-weight:700}
+.sum{flex:1;min-width:0;font-size:12.5px}
+.sum b{font-size:13.5px}
+
+/* 보관함 */
+.litem{background:var(--white);border:1px solid var(--line);border-radius:var(--r2);padding:12px;
+  display:flex;gap:12px;align-items:flex-start}
+.skel{background:linear-gradient(100deg,#EFEFEF 25%,#F9F9F9 45%,#EFEFEF 65%);background-size:200% 100%;
+  animation:sh 1.2s linear infinite;border-radius:var(--r1)}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.hide{display:none!important}
+.spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:99px;
+  animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.empty{border:1px dashed var(--g300);border-radius:var(--r2);padding:26px 18px;text-align:center;
+  display:flex;flex-direction:column;gap:9px;align-items:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">LOGO</div>
+    <div style="flex:1;min-width:0">
+      <h1>카톡 배너 생성기</h1>
+      <div class="hsub" id="hsub">불러오는 중…</div>
+    </div>
+    <button class="chip" id="btnLib" style="min-height:36px;padding:0 12px">보관함 <b id="libN">0</b></button>
+  </header>
+
+  <div class="prog" id="prog">
+    <div class="prow">
+      <span class="pbadge" id="pb">1 / 4</span>
+      <span class="ptitle" id="pt">상품 선택</span>
+      <span class="pnext" id="pn">다음 · 문구 선택</span>
+    </div>
+    <div class="bar"><i id="pbar" style="width:25%"></i></div>
+  </div>
+
+  <main id="main"></main>
+</div>
+
+<div class="fixed" id="fixed">
+  <div class="inner">
+    <div class="actions" id="actions"></div>
+    <div class="tabs">
+      <button id="tabMake" aria-pressed="true">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/></svg>
+        배너 만들기</button>
+      <button id="tabLib" aria-pressed="false">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><path d="M2 4h20v4H2zM10 12h4"/></svg>
+        보관함</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+const $ = s => document.querySelector(s);
+const el = (t, a = {}, ...kids) => {
+  const n = document.createElement(t);
+  for (const [k, v] of Object.entries(a)) {
+    if (k === 'html') n.innerHTML = v; else if (k === 'text') n.textContent = v;
+    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if (k.startsWith('aria-')) { if (v !== null && v !== undefined) n.setAttribute(k, String(v)); }
+    else if (v !== null && v !== false && v !== undefined) n.setAttribute(k, v === true ? '' : v);
+  }
+  kids.flat().forEach(k => k && n.append(k.nodeType ? k : String(k)));
+  return n;
+};
+const won = n => Number(n || 0).toLocaleString('ko-KR');
+const api = async (p, opt) => { const r = await fetch(p, opt); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; };
+const post = (p, b) => api(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) });
+
+const icon = { purifier: 'M9 4h34v64H9zM16 20h20M19 34h14v9H19zM26 43v7', air: 'M11 8h30v56H11zM26 22a8 8 0 1 1 0 16 8 8 0 0 1 0-16zM18 52h16',
+  bidet: 'M8 18h36v26H8zM18 18v-6h16v6', dish: 'M8 10h36v50H8zM26 19a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM16 48h20',
+  range: 'M6 16h40v34H6zM17 23a5 5 0 1 1 0 10 5 5 0 0 1 0-10zM35 23a5 5 0 1 1 0 10 5 5 0 0 1 0-10zM13 42h26', bed: 'M4 26h44v20H4zM4 34h44M12 26v-8h24v8' };
+const svgFor = k => `<svg width="52" height="72" viewBox="0 0 52 72" fill="none" stroke="#C8C8C8" stroke-width="2.2" stroke-linecap="round"><path d="${icon[k] || icon.purifier}"/></svg>`;
+
+const S = { step: 1, tab: 'make', meta: null, mode: 'composite', picked: [], cat: '전체', term: '전체',
+  target: '이사 예정', tone: '혜택 강조', season: '9월 이사철',
+  sizeKeys: ['C1350', 'W0800'], primary: 'C1350', copyList: [], copyIdx: 0, copyMeta: null,
+  session: null, styles: [], styleId: null, finals: [], greeting: '', lib: [], busy: false };
+
+const STEPS = [['상품 선택', '다음 · 문구 선택'], ['문구 선택', '다음 · 스타일'], ['배너 스타일 선택', '다음 · 다운로드'], ['배너 다운로드', '']];
+const setBusy = b => { S.busy = b; render(); };
+
+function progress() {
+  const [t, n] = STEPS[S.step - 1];
+  $('#pb').textContent = S.step === 4 ? '4 / 4' : `${S.step} / 4`;
+  $('#pb').className = 'pbadge' + (S.step === 4 ? ' done' : '');
+  $('#pt').textContent = t; $('#pn').textContent = n;
+  $('#pbar').style.width = (S.step * 25) + '%';
+  $('#prog').classList.toggle('hide', S.tab !== 'make');
+}
+
+/* ── 1단계 ── */
+function stepProducts() {
+  const m = S.meta, cats = ['전체', ...new Set(m.products.map(p => p.category || '기타'))];
+  // 약정이 섞이면 배너에서 가격이 아예 숨겨진다. 고르는 단계에서 미리 걸러줘야 MC 가 헛수고하지 않는다.
+  const terms = [...new Set(m.products.map(p => p.term).filter(Boolean))].sort((a, b) => a - b);
+  const list = m.products.filter(p =>
+    (S.cat === '전체' || (p.category || '기타') === S.cat) &&
+    (S.term === '전체' || p.term === S.term));
+  const maxN = S.mode === 'single' ? 1 : 12;
+  const pickedTerms = [...new Set(S.picked.map(id => m.products.find(x => x.goodsId === id)?.term).filter(Boolean))];
+  const mixed = pickedTerms.length > 1;
+  // 가장 많이 고른 약정을 기준으로 남긴다 — 동수면 먼저 고른 쪽
+  const keepTerm = pickedTerms.length
+    ? pickedTerms.map(t => ({ t, n: S.picked.filter(id => m.products.find(x => x.goodsId === id)?.term === t).length }))
+        .sort((a, b) => b.n - a.n)[0].t
+    : null;
+  return [
+    m.stale ? el('div', { class: 'note r' }, `카탈로그가 ${m.catalogAgeDays}일 지났습니다 — 가격이 바뀌었을 수 있어 배너 생성이 차단됩니다. 먼저 npm run crawl 로 갱신하세요.`) : null,
+    m.catalogFile?.includes('sample') ? el('div', { class: 'note y' }, '샘플 카탈로그입니다. 실제 상품·가격은 npm run crawl → npm run catalog 로 수집하세요.') : null,
+    el('div', { class: 'sec' },
+      el('div', { class: 'lbl' }, '배너 유형'),
+      el('div', { class: 'seg' },
+        el('button', { 'aria-pressed': S.mode === 'single', onclick: () => { S.mode = 'single'; S.picked = S.picked.slice(0, 1); render(); } }, '단품 배너'),
+        el('button', { 'aria-pressed': S.mode === 'composite', onclick: () => { S.mode = 'composite'; render(); } }, '종합 배너 · 2~12종')),
+    ),
+    el('div', { class: 'sec' },
+      el('div', { class: 'chips' }, cats.map(c =>
+        el('button', { class: 'chip', 'aria-pressed': S.cat === c, onclick: () => { S.cat = c; render(); } }, c))),
+      // 약정 필터 — 종합 배너에서만 의미가 있다 (단품은 섞일 일이 없다)
+      S.mode === 'composite' && terms.length > 1 ? el('div', { class: 'chips' },
+        el('span', { class: 'lbl', style: 'align-self:center;margin-right:2px' }, '약정'),
+        el('button', { class: 'chip sm', 'aria-pressed': S.term === '전체', onclick: () => { S.term = '전체'; render(); } }, '전체'),
+        ...terms.map(t => el('button', { class: 'chip sm', 'aria-pressed': S.term === t,
+          onclick: () => { S.term = t; render(); } }, `${t}년`))) : null,
+      mixed ? el('div', { class: 'note y', style: 'margin-bottom:2px' },
+        el('div', {}, `약정이 다른 제품이 섞였습니다 (${pickedTerms.map(t => t + '년').join(' · ')}). 이대로 만들면 배너에서 가격이 숨겨집니다.`),
+        el('button', { class: 'btn line sm', style: 'margin-top:8px',
+          onclick: () => {
+            S.picked = S.picked.filter(id => S.meta.products.find(x => x.goodsId === id)?.term === keepTerm);
+            S.term = keepTerm; S.copyList = []; render();
+          } }, `${keepTerm}년 약정만 남기기`)) : null,
+      el('div', { class: 'grid' }, list.map(p => {
+        const on = S.picked.includes(p.goodsId);
+        const idx = S.picked.indexOf(p.goodsId);
+        return el('button', { class: 'pcard', 'aria-pressed': on, onclick: () => {
+          if (on) S.picked = S.picked.filter(x => x !== p.goodsId);
+          else if (S.mode === 'single') S.picked = [p.goodsId];
+          else if (S.picked.length < maxN) S.picked.push(p.goodsId);
+          render();
+        } },
+          el('div', { class: 'pimg', html: p.image ? `<img src="/assets/${p.goodsId}.png" alt="${p.name || ''}" loading="lazy">` : svgFor(p.kind) },
+            on ? el('span', { class: 'bdg red', style: 'left:9px;top:9px' }, String(idx + 1)) : null,
+            idx === 0 && S.picked.length > 1 ? el('span', { class: 'bdg dark', style: 'right:9px;top:9px' }, '대표') : null,
+            p.promo?.length ? el('span', { class: 'bdg yel', style: 'right:9px;bottom:9px' }, p.promo[0]) : null,
+            el('span', { class: 'chk', html: on ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>' : '' })),
+          el('div', { class: 'pbody' },
+            el('div', { class: 'pmodel' }, p.model || '모델 미확인'),
+            el('div', { class: 'pname' }, p.name || '(제품명 없음)'),
+            el('div', { class: 'pattr' }, [p.care, p.feature, p.color].filter(Boolean).join(' · ') || '속성 미확인'),
+            // 약정은 가격 표시 여부를 좌우하므로 카드에 항상 보여준다
+            el('div', { class: 'tagrow' },
+              p.term ? el('span', { class: 'tag' + (keepTerm && p.term !== keepTerm ? ' warn' : '') }, `약정 ${p.term}년`) : null,
+              keepTerm && p.term && p.term !== keepTerm && !on ? el('span', { class: 'cap' }, '함께 고르면 가격 숨김') : null),
+            p.sale ? el('div', {},
+              p.base ? el('div', { class: 'pbase' }, `월 ${won(p.base)}원`) : null,
+              el('div', {}, el('span', { class: 'psale' }, won(p.sale)), el('span', { class: 'cap' }, '원/월')))
+                    : el('div', { class: 'tag' }, '가격 미확정 · 상담 시 안내')))
+      })))
+  ];
+}
+
+/* ── 2단계 ── */
+function stepCopy() {
+  const chipRow = (label, key, opts) => el('div', { class: 'sec' },
+    el('div', { class: 'cap' }, label),
+    el('div', { class: 'chips' }, opts.map(o =>
+      el('button', { class: 'chip', 'aria-pressed': S[key] === o, onclick: () => { S[key] = o; S.copyList = []; render(); } }, o))));
+  const sizes = S.meta.sizes;
+  return [
+    el('div', { class: 'sec' },
+      el('div', { class: 'lbl' }, '어떤 고객에게 보내나요?'),
+      chipRow('고객', 'target', ['이사 예정', '신혼', '1인가구', '사무실']),
+      chipRow('시기', 'season', ['9월 이사철', '환절기', '추석', '연말']),
+      chipRow('말투', 'tone', ['혜택 강조', '정보 전달', '친근하게'])),
+    el('div', { class: 'sec' },
+      el('div', { class: 'lbl' }, '받을 크기 (배너는 여기서 고른 크기로 나옵니다)'),
+      el('div', { class: 'chips' }, sizes.map(s =>
+        el('button', { class: 'chip', 'aria-pressed': S.sizeKeys.includes(s.key), onclick: () => {
+          S.sizeKeys = S.sizeKeys.includes(s.key) ? S.sizeKeys.filter(k => k !== s.key) : [...S.sizeKeys, s.key];
+          if (!S.sizeKeys.length) S.sizeKeys = [s.key];
+          S.primary = S.sizeKeys[0]; S.copyList = []; render();
+        } }, `${s.label} ${s.w}×${s.h}`))),
+      el('div', { class: 'cap' }, `시안은 ${sizes.find(s => s.key === S.primary)?.label} 기준으로 보여주고, 고른 크기 전부를 4단계에서 받습니다.`)),
+    el('div', { class: 'sec' },
+      el('div', { style: 'display:flex;align-items:center;gap:8px' },
+        el('div', { class: 'lbl' }, '문구 3가지 중에 골라주세요'),
+        S.copyMeta ? el('span', { class: 'tag ok' }, S.copyMeta.source === 'openai' ? 'OpenAI 생성' : '규칙 생성') : null,
+        el('button', { class: 'btn gho sm', style: 'margin-left:auto', onclick: loadCopy }, '다시 만들기')),
+      S.busy && !S.copyList.length ? el('div', { class: 'sec' }, [1, 2, 3].map(() =>
+        el('div', { class: 'copycard' }, el('div', { class: 'skel', style: 'height:26px;width:70%' }), el('div', { class: 'skel', style: 'height:16px;width:90%' })))) : null,
+      ...S.copyList.map((c, i) => el('button', { class: 'copycard', 'aria-pressed': S.copyIdx === i,
+        onclick: () => { S.copyIdx = i; S.styles = []; render(); } },
+        el('div', { style: 'display:flex;align-items:center;gap:9px' },
+          el('span', { class: 'rad' }),
+          el('span', { style: 'font-size:13px;font-weight:700' }, `${i + 1}번 · ${({ benefit: '혜택을 앞에', scene: '생활 장면으로', price: '가격을 앞에' })[c.angle] || c.angle}`),
+          c.badge ? el('span', { class: 'tag red', style: 'margin-left:auto' }, c.badge) : null),
+        el('div', { class: 'hl' }, c.headline),
+        el('div', { class: 'sl' }, c.subline),
+        el('span', { class: 'ctachip' }, c.cta))),
+      S.copyMeta?.rejected?.length ? el('div', { class: 'note y' },
+        `검수에서 ${S.copyMeta.rejected.length}건을 폐기했습니다 — ${S.copyMeta.rejected.map(r => r.errs.join(', ')).join(' / ')}`) : null,
+      S.copyMeta && !S.copyMeta.priceVisibility.show ? el('div', { class: 'note r' },
+        '약정 기간이 다른 제품이 섞여 배너에서 가격을 숨깁니다. "상담 시 안내"로 들어갑니다.') : null,
+      el('div', { class: 'note o' }, '광고에 쓸 수 없는 표현은 자동으로 바꾸고, 렌탈 조건 안내문(약정·등록비·위약금)은 배너 아래에 자동으로 들어갑니다.'))
+  ];
+}
+
+/* ── 3단계 ── */
+function stepStyles() {
+  const shown = S.styles.filter(s => s.pass);
+  const hidden = S.styles.filter(s => !s.pass && !s.excluded);
+  const excl = S.styles.filter(s => s.excluded);
+  return [
+    el('div', { class: 'note g' }, '문구·제품·가격은 이미 다 들어가 있습니다. 보기 좋은 것만 골라주세요.'),
+    S.busy && !S.styles.length ? el('div', { class: 'styles' }, [1, 2, 3, 4, 5, 6].map(() =>
+      el('div', { class: 'scard' }, el('div', { class: 'skel', style: 'height:190px' }), el('div', { class: 'skel', style: 'height:18px;width:60%' })))) : null,
+    shown.length ? el('div', { class: 'styles' }, shown.map(s =>
+      el('button', { class: 'scard', 'aria-pressed': S.styleId === s.styleId,
+        onclick: () => { S.styleId = s.styleId; render(); } },
+        el('div', { class: 'sthumb' }, el('img', { src: `/out/${S.session}/${s.file}`, alt: `${s.name} 시안`, style: 'width:100%;max-width:190px' })),
+        el('div', { class: 'srow' }, el('span', { class: 'rad' }), el('span', { class: 'sname' }, s.name),
+          s.styleId === 'neutral-white' ? el('span', { class: 'tag red', style: 'margin-left:auto' }, '추천') : null),
+        el('div', { class: 'cap' }, s.hint),
+        el('div', { class: 'tagrow' },
+          el('span', { class: 'tag' }, s.pattern),
+          s.retries ? el('span', { class: 'tag' }, `재시도 ${s.retries}`) : null,
+          s.collides ? el('span', { class: 'tag' }, `충돌해소 ${s.collides}`) : null,
+          el('span', { class: 'tag ok' }, '검수 통과'))))) : null,
+    !S.busy && !shown.length && S.styles.length ? el('div', { class: 'empty' },
+      el('div', { style: 'font-weight:700' }, '보여드릴 시안이 없습니다'),
+      el('div', { class: 'cap' }, '검수를 통과한 조합이 없습니다. 문구를 바꾸거나 상품 수를 조정해 보세요.'),
+      el('button', { class: 'btn line sm', onclick: () => { S.step = 2; render(); } }, '문구 다시 고르기')) : null,
+    hidden.length || excl.length ? el('div', { class: 'note g' },
+      [hidden.length ? `검수 미통과 ${hidden.length}건은 목록에서 숨겼습니다.` : '',
+       excl.length ? `조건에 맞지 않는 스타일 ${excl.length}건 제외 — ${excl.map(e => `${e.name}(${e.reason})`).join(', ')}` : ''].filter(Boolean).join(' ')) : null,
+  ];
+}
+
+/* ── 4단계 ── */
+function stepDownload() {
+  const okFinals = S.finals.filter(f => f.pass);
+  return [
+    S.busy && !S.finals.length ? el('div', { class: 'sec' }, [1, 2].map(() => el('div', { class: 'dl' },
+      el('div', { class: 'skel', style: 'width:78px;height:96px' }), el('div', { class: 'skel', style: 'height:18px;flex:1' })))) : null,
+    okFinals.length ? el('div', { class: 'sec' },
+      el('div', { class: 'lbl' }, `받을 배너 ${okFinals.length}장`),
+      ...okFinals.map(f => el('div', { class: 'dl' },
+        el('div', { class: 'dlthumb' }, el('img', { src: `/out/${S.session}/${f.file}`, alt: `${f.sizeLabel} 배너` })),
+        el('div', { style: 'flex:1;min-width:0;display:flex;flex-direction:column;gap:6px' },
+          el('div', { style: 'font-size:14px;font-weight:700' }, f.sizeLabel),
+          el('div', { class: 'cap' }, `${f.w} × ${f.h} · ${f.kb}KB · ${f.pattern}`),
+          el('div', { class: 'tagrow' }, el('span', { class: 'tag ok' }, '검수 통과'), f.retries ? el('span', { class: 'tag' }, `재시도 ${f.retries}`) : null),
+          el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' },
+            el('a', { class: 'btn sm', href: `/out/${S.session}/${f.file}`, download: f.file }, '사진 저장'),
+            el('a', { class: 'btn gho sm', href: `/out/${S.session}/${f.file}`, target: '_blank' }, '크게 보기')))))) : null,
+    S.finals.some(f => !f.pass) ? el('div', { class: 'note y' },
+      `${S.finals.filter(f => !f.pass).length}개 크기는 검수를 통과하지 못해 제외했습니다 — ` +
+      S.finals.filter(f => !f.pass).map(f => `${f.sizeLabel || f.sizeKey}(${f.error || f.failed?.[0]?.label || '실패'})`).join(', ')) : null,
+    S.greeting ? el('div', { class: 'sec' },
+      el('div', { style: 'display:flex;align-items:center;gap:8px' },
+        el('div', { class: 'lbl' }, '함께 보낼 인사말'),
+        el('span', { class: 'tag ok' }, '자동 작성'),
+        el('button', { class: 'btn gho sm', style: 'margin-left:auto', onclick: async e => {
+          const t = $('#greet'); await navigator.clipboard.writeText(t.value);
+          e.target.textContent = '복사됨'; setTimeout(() => e.target.textContent = '문구 복사', 1400);
+        } }, '문구 복사')),
+      el('textarea', { class: 'ta', id: 'greet' }, S.greeting),
+      el('div', { class: 'cap' }, '이미지를 못 보는 고객도 문자만으로 판단할 수 있도록 제품·가격·조건을 텍스트로 반복해 넣었습니다.')) : null,
+    okFinals.length ? el('div', { class: 'note o' }, '아래 [보관함에 저장]을 누르면 이 배너 세트가 보관함에 남아 나중에 다시 받거나 재사용할 수 있습니다.') : null,
+  ];
+}
+
+/* ── 보관함 ── */
+function libraryView() {
+  if (!S.lib.length) return [el('div', { class: 'empty' },
+    el('svg', { width: '30', height: '30', viewBox: '0 0 24 24', fill: 'none', stroke: '#C8C8C8', 'stroke-width': '1.7', html: '<path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><path d="M2 4h20v4H2zM10 12h4"/>' }),
+    el('div', { style: 'font-weight:700' }, '아직 만든 배너가 없어요'),
+    el('div', { class: 'cap' }, '상품을 고르면 2분 안에 첫 배너가 나옵니다'),
+    el('button', { class: 'btn sm', onclick: () => { S.tab = 'make'; render(); } }, '첫 배너 만들기'))];
+  return [el('div', { class: 'sec' }, ...S.lib.map(it => el('div', { class: 'litem' },
+    el('div', { class: 'dlthumb' }, el('img', { src: `/out/${it.session}/${it.files?.[0]}`, alt: it.title, style: 'max-height:88px' })),
+    el('div', { style: 'flex:1;min-width:0;display:flex;flex-direction:column;gap:6px' },
+      el('div', { style: 'display:flex;gap:8px;align-items:flex-start' },
+        el('div', { style: 'flex:1;min-width:0' },
+          el('div', { style: 'font-size:14.5px;font-weight:700' }, it.title),
+          el('div', { class: 'cap' }, `${it.styleName} · ${new Date(it.savedAt).toLocaleString('ko-KR')}`)),
+        el('button', { onclick: async () => { await post('/api/library/star', { id: it.id }); loadLib(); },
+          html: `<svg width="20" height="20" viewBox="0 0 24 24" fill="${it.star ? '#EA1738' : 'none'}" stroke="${it.star ? '#EA1738' : '#C8C8C8'}" stroke-width="1.7"><path d="M12 20s-7-4.4-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.6-7 9-7 9z"/></svg>` })),
+      el('div', { class: 'tagrow' }, ...(it.sizes || []).map(s => el('span', { class: 'tag' }, s)), it.target ? el('span', { class: 'tag' }, it.target) : null),
+      el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' },
+        ...(it.files || []).map((f, i) => el('a', { class: 'btn gho sm', href: `/out/${it.session}/${f}`, download: f }, (it.sizes?.[i] || '받기'))))))))];
+}
+
+/* ── 액션 바 ── */
+function actions() {
+  const a = $('#actions'); a.replaceChildren();
+  if (S.tab === 'lib') { a.append(el('button', { class: 'btn', style: 'flex:1', onclick: () => { reset(); S.tab = 'make'; render(); } }, '새 배너 만들기')); return; }
+  const sum = (t, s) => el('div', { class: 'sum' }, el('b', {}, t), el('div', { class: 'cap' }, s));
+  if (S.step === 1) {
+    const n = S.picked.length, tot = S.picked.reduce((x, id) => x + (S.meta.products.find(p => p.goodsId === id)?.sale || 0), 0);
+    const pt = [...new Set(S.picked.map(id => S.meta.products.find(x => x.goodsId === id)?.term).filter(Boolean))];
+    const sub = pt.length > 1 ? '약정이 달라 가격이 숨겨집니다'
+      : n ? (S.mode === 'single' ? '단품 배너' : '종합 배너')
+      : (S.mode === 'single' ? '제품 하나를 골라주세요' : '2~12종까지 고를 수 있어요');
+    a.append(sum(n ? `${n}종 선택${tot && pt.length <= 1 ? ` · 월 ${won(tot)}원` : ''}` : '상품을 골라주세요', sub),
+      el('button', { class: 'btn', disabled: !n || S.meta.stale, onclick: () => { S.step = 2; render(); loadCopy(); } }, '다음'));
+  } else if (S.step === 2) {
+    a.append(el('button', { class: 'btn gho', onclick: () => { S.step = 1; render(); } }, '이전'),
+      sum(S.copyList.length ? `${S.copyIdx + 1}번 문구` : '문구를 만들고 있어요', `${S.sizeKeys.length}개 크기로 받기`),
+      el('button', { class: 'btn', disabled: !S.copyList.length || S.busy, onclick: () => { S.step = 3; render(); loadStyles(); } }, '다음'));
+  } else if (S.step === 3) {
+    const st = S.styles.find(s => s.styleId === S.styleId);
+    a.append(el('button', { class: 'btn gho', onclick: () => { S.step = 2; render(); } }, '이전'),
+      sum(st ? st.name : (S.busy ? '시안을 만들고 있어요' : '마음에 드는 배너를 골라주세요'), st ? st.hint : ''),
+      el('button', { class: 'btn', disabled: !S.styleId || S.busy, onclick: () => { S.step = 4; render(); loadFinals(); } }, '다음'));
+  } else {
+    const ok = S.finals.filter(f => f.pass);
+    a.append(el('button', { class: 'btn gho', onclick: () => { S.step = 3; render(); } }, '이전'),
+      el('button', { class: 'btn dark', style: 'flex:1', disabled: !ok.length || S.busy, onclick: saveLib }, '보관함에 저장'),
+      el('button', { class: 'btn', disabled: !ok.length, onclick: () => saveAll(ok) }, '배너 전부 저장'));
+  }
+}
+
+let _tt;
+function toast(msg) {
+  let n = document.querySelector('.toast');
+  if (!n) { n = document.createElement('div'); n.className = 'toast'; document.body.append(n); }
+  n.textContent = msg; requestAnimationFrame(() => n.classList.add('on'));
+  clearTimeout(_tt); _tt = setTimeout(() => n.classList.remove('on'), 3600);
+}
+
+async function saveAll(list) {
+  for (const f of list) {
+    const a = document.createElement('a');
+    a.href = `/out/${S.session}/${f.file}`; a.download = f.file;
+    document.body.append(a); a.click(); a.remove();
+    await new Promise(r => setTimeout(r, 350));
+  }
+  toast(`${list.length}장을 저장했습니다. 카카오톡에서 사진으로 첨부해 보내세요.`);
+}
+
+function render() {
+  progress();
+  const m = $('#main'); m.replaceChildren();
+  const view = S.tab === 'lib' ? libraryView()
+    : S.step === 1 ? stepProducts() : S.step === 2 ? stepCopy() : S.step === 3 ? stepStyles() : stepDownload();
+  view.filter(Boolean).forEach(n => m.append(n));
+  $('#tabMake').setAttribute('aria-pressed', S.tab === 'make');
+  $('#tabLib').setAttribute('aria-pressed', S.tab === 'lib');
+  actions();
+  document.documentElement.style.setProperty('--bar', ($('#actions').offsetHeight || 0) + 'px');
+}
+
+const reset = () => Object.assign(S, { step: 1, picked: [], copyList: [], copyMeta: null, session: null, styles: [], styleId: null, finals: [], greeting: '' });
+
+async function loadCopy() {
+  setBusy(true);
+  try {
+    const r = await post('/api/copy', { productIds: S.picked, target: S.target, tone: S.tone, season: S.season, sizeKey: S.primary });
+    S.copyList = r.usable; S.copyMeta = r; S.copyIdx = 0; S.styles = [];
+  } catch (e) { alert('문구 생성 실패: ' + e.message); }
+  setBusy(false);
+}
+async function loadStyles() {
+  setBusy(true);
+  try {
+    const r = await post('/api/render', { productIds: S.picked, copy: S.copyList[S.copyIdx], sizeKey: S.primary,
+      consultant: { name: '김○○ MC', phone: '010-0000-0000' }, season: S.season, session: S.session });
+    S.session = r.session; S.styles = r.results;
+    S.styleId = r.results.find(x => x.pass)?.styleId || null;
+  } catch (e) { alert('시안 생성 실패: ' + e.message); }
+  setBusy(false);
+}
+async function loadFinals() {
+  setBusy(true);
+  try {
+    const r = await post('/api/sizes', { productIds: S.picked, styleId: S.styleId, sizeKeys: S.sizeKeys,
+      target: S.target, tone: S.tone, season: S.season, consultant: { name: '김○○ MC', phone: '010-0000-0000' }, session: S.session });
+    S.finals = r.results; S.greeting = r.greeting;
+  } catch (e) { alert('생성 실패: ' + e.message); }
+  setBusy(false);
+}
+async function saveLib() {
+  const ok = S.finals.filter(f => f.pass);
+  const st = S.styles.find(s => s.styleId === S.styleId);
+  const names = S.picked.map(id => S.meta.products.find(p => p.goodsId === id)?.name).filter(Boolean);
+  await post('/api/library', { session: S.session, title: `${S.target} ${S.picked.length}종`,
+    styleId: S.styleId, styleName: st?.name, target: S.target, files: ok.map(f => f.file),
+    sizes: ok.map(f => f.sizeLabel), products: names, greeting: $('#greet')?.value || S.greeting });
+  await loadLib(); S.tab = 'lib'; render();
+}
+async function loadLib() { const l = await api('/api/library'); S.lib = l.items || []; $('#libN').textContent = S.lib.length; }
+
+$('#tabMake').onclick = () => { S.tab = 'make'; render(); };
+$('#tabLib').onclick = () => { S.tab = 'lib'; loadLib().then(render); };
+$('#btnLib').onclick = () => { S.tab = 'lib'; loadLib().then(render); };
+
+(async () => {
+  S.meta = await api('/api/meta');
+  const p = S.meta.products;
+  S.picked = p.slice(0, 3).map(x => x.goodsId);
+  $('#hsub').textContent = `김○○ MC · 상품 ${p.length}종` + (S.meta.hasOpenAI ? ' · OpenAI' : ' · 규칙 문구');
+  await loadLib();
+  render();
+})();
+</script>
+</body>
+</html>

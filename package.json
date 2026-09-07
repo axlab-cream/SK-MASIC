@@ -1,0 +1,22 @@
+{
+  "name": "sk-masic",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SK매직 카카오톡 배너 자동생성기 — MC용",
+  "scripts": {
+    "start": "node 03_engine/server.mjs",
+    "ui": "node 03_engine/server.mjs",
+    "verify": "node 03_engine/verify.mjs",
+    "crawl": "node 03_engine/crawler/pattern.mjs",
+    "banner": "node 03_engine/cli.mjs",
+    "poc": "node 03_engine/cli.mjs --consultant \"김○○ MC\" --sizes C1350,W0800,S1080,L1920 --allow-stale",
+    "poc:single": "node 03_engine/cli.mjs --products G000069846 --sizes W0800,C1350,S1080 --allow-stale",
+    "poc:list": "node 03_engine/cli.mjs --products G000069846,G000069931,G000069282,G000069986,G000062998,G000068821 --sizes C1350,L1920 --allow-stale",
+    "catalog": "node 03_engine/catalog/index.mjs",
+    "trim": "node 03_engine/catalog/trim.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}

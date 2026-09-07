@@ -1,0 +1,90 @@
+{
+  "note": "규격 · 세이프존 · 글자수 상한. 03_engine/layout/spec.mjs 와 같은 값을 유지한다.",
+  "sizes": {
+    "W0800": {
+      "w": 800,
+      "h": 600,
+      "label": "카톡 채널 와이드",
+      "maxProducts": 3,
+      "limits": {
+        "headline": 18,
+        "subline": 34,
+        "cta": 10,
+        "label": 14
+      }
+    },
+    "S1080": {
+      "w": 1080,
+      "h": 1080,
+      "label": "정사각",
+      "maxProducts": 4,
+      "limits": {
+        "headline": 20,
+        "subline": 40,
+        "cta": 10,
+        "label": 14
+      }
+    },
+    "C1350": {
+      "w": 1080,
+      "h": 1350,
+      "label": "카톡 채팅방 세로",
+      "maxProducts": 6,
+      "default": true,
+      "limits": {
+        "headline": 22,
+        "subline": 44,
+        "cta": 12,
+        "label": 16
+      }
+    },
+    "L1920": {
+      "w": 1080,
+      "h": 1920,
+      "label": "긴 세로 상세",
+      "maxProducts": 12,
+      "limits": {
+        "headline": 24,
+        "subline": 50,
+        "cta": 12,
+        "label": 16
+      }
+    }
+  },
+  "safeZone": {
+    "formula": "m = round(min(W,H) * 0.06); bottom = m + noticeH + 8",
+    "exception": "notice 만 세이프존 밖 허용"
+  },
+  "font": {
+    "readableMin": "max(18, round(min(W,H) * 0.03))",
+    "auxMin": "max(14, round(min(W,H) * 0.014))",
+    "auxScope": [
+      "notice",
+      "단위 접미사(원)",
+      "취소선 기준가"
+    ],
+    "reason": "카톡은 이미지를 압축·축소해 보여주므로 이 값 아래면 실기기에서 판독 불가"
+  },
+  "qa": {
+    "iouTextProduct": 0.02,
+    "iouTextText": 0,
+    "contrast": 4.5,
+    "contrastLarge": 3.0,
+    "largePx": 24,
+    "pngMaxKB": 500,
+    "exclusionPadRatio": 0.02,
+    "collisionIouTrigger": 0.05,
+    "maxCollisionPasses": 5
+  },
+  "retry": {
+    "copy": 2,
+    "compose": 5,
+    "then": "규격 격상 → 그래도 실패면 목록에서 제외",
+    "minCandidates": 3
+  },
+  "naming": {
+    "single": "SGL-{model}-{sizeId}-{styleId}.png",
+    "composite": "CMP-{n}P-{sizeId}-{styleId}.png",
+    "dir": "04_output/{single|composite}/{yyyymmdd}/"
+  }
+}

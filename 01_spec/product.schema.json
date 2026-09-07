@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SK MASIC product catalog",
+  "type": "object",
+  "required": [
+    "syncedAt",
+    "products"
+  ],
+  "properties": {
+    "syncedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "수집 시각. 7일 초과 시 배너 생성 차단 (D-19)"
+    },
+    "source": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/product"
+      }
+    }
+  },
+  "$defs": {
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goodsId",
+        "model",
+        "name",
+        "kind",
+        "care",
+        "term"
+      ],
+      "properties": {
+        "goodsId": {
+          "type": "string",
+          "pattern": "^G[0-9]{9}$",
+          "description": "공식몰 상품 ID 패턴"
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "모델코드. Roboto 로 표기"
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "라인명 + 핵심 유형 + 크기 변형. 수식어 금지"
+        },
+        "kind": {
+          "enum": [
+            "purifier",
+            "air",
+            "bidet",
+            "dish",
+            "range",
+            "bed",
+            "filter"
+          ]
+        },
+        "ice": {
+          "type": "boolean",
+          "description": "얼음 제품 여부. ice-campaign 스타일 노출 조건 (D-15)"
+        },
+        "care": {
+          "enum": [
+            "방문관리",
+            "셀프관리",
+            null
+          ],
+          "description": "3속성 순서의 첫 번째"
+        },
+        "feature": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "3속성 순서의 두 번째. 검증 가능한 스펙만"
+        },
+        "color": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "3속성 순서의 세 번째"
+        },
+        "term": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 10,
+          "description": "약정 연수. 혼재 시 가격 숨김"
+        },
+        "base": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "기준가(월). 취소선 표기. 없으면 null — 추정 금지"
+        },
+        "sale": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "할인가(월). 가장 큰 숫자로 표기"
+        },
+        "partner": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "제휴 혜택가(월). 표기 시 조건 링크 필수"
+        },
+        "rating": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "reviews": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "promo": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 8
+          },
+          "description": "배지 문구. 하나에 한 메시지"
+        },
+        "image": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "여백 트림된 로컬 경로. null 이면 자리표시자 렌더"
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "CDN 원본 URL 목록"
+        },
+        "priceCandidates": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "크롤 단계의 미확정 가격 후보"
+        },
+        "category": {
+          "type": "string"
+        },
+        "sourceUrl": {
+          "type": "string"
+        },
+        "harvestedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "needsPriceConfirm": {
+          "type": "boolean",
+          "description": "가격 미확정. true 면 배너에서 가격을 숨기고 '상담 시 안내'로 대체"
+        },
+        "needsReview": {
+          "type": "boolean",
+          "description": "모델명·제품명 등 필수 정보가 비어 사람 확인이 필요"
+        },
+        "promoPrice": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "최종 할인가(월). 조건부 가격이므로 promoTerms 가 없으면 배너에 쓰지 않는다 (D-33)"
+        },
+        "promoTerms": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "months",
+            "fromMonth",
+            "afterPrice"
+          ],
+          "properties": {
+            "months": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 120,
+              "description": "promoPrice 가 적용되는 개월 수"
+            },
+            "fromMonth": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 121,
+              "description": "이 개월차부터 afterPrice 로 전환"
+            },
+            "afterPrice": {
+              "type": "integer",
+              "description": "전환 후 월 구독료"
+            }
+          },
+          "description": "최종 할인가의 적용 조건. 이 값이 있어야 promoPrice 를 광고에 쓸 수 있다"
+        },
+        "partnerMax": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "제휴카드 월 최대 할인액. 가격이 아니라 할인액이다 — 구독료로 표기 금지"
+        },
+        "careCycle": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 24,
+          "description": "방문 주기(개월)"
+        },
+        "obligMonths": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 144,
+          "description": "의무사용 개월. term 의 근거"
+        },
+        "filterKey": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "수확 시 적용된 목록 필터 키. ice 추론 근거"
+        },
+        "sizes": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 8,
+          "description": "매트리스·프레임의 선택 가능 사이즈. 배너에 쓸 때는 대표 1개만 (D-34)"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "공식몰 원본 제목. 파싱 규칙 수정 시 재크롤 없이 재해석하기 위한 근거"
+        },
+        "priceStable": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "수확 시 가격 읽기가 두 번 연속 일치했는지. false 면 가격을 싣지 않는다 (D-33)"
+        }
+      }
+    }
+  }
+}

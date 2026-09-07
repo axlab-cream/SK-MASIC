@@ -1,0 +1,111 @@
+{
+  "note": "SK매직몰 상품DB를 'URL 패턴'으로 수확하는 설정. DOM 셀렉터가 아니라 패턴을 쓰기 때문에 사이트 마크업이 바뀌어도 대부분 살아남는다.",
+  "base": "https://www.skmagic.com",
+  "cdn": "https://static.skmagic.com",
+  "urlPatterns": {
+    "goodsList": "/goods/indexGoodsList?dispClsfNo={dispClsfNo}",
+    "goodsListF": "/goods/indexGoodsList?dispClsfNo={dispClsfNo}&goodsFilterList={filter}",
+    "goodsDetail": "/goods/indexGoodsDetail?goodsId={goodsId}",
+    "eventDetail": "/event/indexEventDetail?eventNo={eventNo}",
+    "goodsImage": "/image/goods/{goodsId}/{goodsId}_{n}.{ext}",
+    "goodsThumb": "/image/goods/{goodsId}/{goodsId}_{n}_480x480.{ext}"
+  },
+  "idPattern": "G\\d{9}",
+  "imageExts": [
+    "png",
+    "jpg"
+  ],
+  "imageIndexRange": [
+    1,
+    6
+  ],
+  "categories": [
+    {
+      "key": "purifier",
+      "kind": "purifier",
+      "name": "정수기",
+      "dispClsfNo": "100000005",
+      "filters": {
+        "ice": 6,
+        "direct": 1,
+        "large": 2
+      }
+    },
+    {
+      "key": "air",
+      "kind": "air",
+      "name": "공기청정기",
+      "dispClsfNo": "100000010",
+      "filters": {
+        "p11_20": 23,
+        "p21_30": 24
+      }
+    },
+    {
+      "key": "bidet",
+      "kind": "bidet",
+      "name": "비데",
+      "dispClsfNo": "100000024",
+      "filters": {}
+    },
+    {
+      "key": "mattress",
+      "kind": "bed",
+      "name": "매트리스",
+      "dispClsfNo": "1000000245",
+      "filters": {}
+    },
+    {
+      "key": "frame",
+      "kind": "bed",
+      "name": "프레임",
+      "dispClsfNo": "1000000246",
+      "filters": {}
+    },
+    {
+      "key": "filter",
+      "kind": "filter",
+      "name": "필터 정기배송",
+      "dispClsfNo": "1000000227",
+      "filters": {}
+    }
+  ],
+  "eventNos": [
+    7417,
+    3068,
+    4628
+  ],
+  "fieldPatterns": {
+    "model": "[A-Z]{2,4}[A-Z0-9-]{4,14}",
+    "price": "([0-9]{1,3}(?:,[0-9]{3})+)\\s*원",
+    "term": "(\\d)\\s*년\\s*약정|의무\\s*(\\d+)\\s*년",
+    "months": "(\\d{2,3})\\s*개월",
+    "care": "방문관리|셀프관리|방문 관리|셀프 관리",
+    "color": "(내추럴\\s*화이트|오트밀\\s*베이지|라이트\\s*그레이|화이트|블랙|베이지|그레이|실버)",
+    "promoTag": "구독료할인|설치비면제|등록비면제|무료배송|사은품|반값|신제품"
+  },
+  "priceLabels": {
+    "base": "기준 구독료",
+    "sale": "기본 할인가",
+    "promo": "최종 할인가"
+  },
+  "priceLabelsNote": "2026-09-07 상세 페이지 관찰값. 라벨이 바뀌면 여기만 고친다. 라벨을 못 찾으면 가격은 null 로 남고 추정하지 않는다.",
+  "categoriesNote": [
+    "2026-09-07 GNB 실측: /goods/indexGoodsList 가 다루는 카테고리는 정수기·공기청정기·비데·매트리스·프레임·필터정기배송 뿐이다.",
+    "식기세척기·전기레인지·건조기는 이 구독몰 목록에 존재하지 않는다 (홈·목록 페이지 링크 208개 전수 확인, 해당 텍스트 0건).",
+    "따라서 그 품목이 필요하면 다른 판매 채널을 출처로 잡고 02_data/override.csv 로 수동 입력해야 한다 — 여기에 dispClsfNo 를 추측해 넣지 말 것.",
+    "카테고리 코드 재확인: node 99_scratch/dump-gnb.mjs"
+  ],
+  "observedCategoryCodes": {
+    "100000005": "정수기",
+    "100000010": "공기청정기",
+    "100000024": "비데",
+    "1000000245": "매트리스",
+    "1000000246": "프레임",
+    "1000000227": "필터정기배송 정수기",
+    "1000000241": "정수기 필터",
+    "1000000108": "공기청정기 필터",
+    "1000000112": "비데 필터",
+    "1000000332": "정수기 미네랄 카트리지"
+  }
+}
