@@ -32,8 +32,7 @@ img{display:block;max-width:100%}
 /* 헤더 · 진행 */
 header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--line);
   padding:0 20px;height:56px;display:flex;align-items:center;gap:10px}
-.logo{width:26px;height:26px;border:1px dashed var(--g300);border-radius:var(--r1);flex:none;
-  display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--g500);letter-spacing:.04em}
+.logo{width:68px;height:36px;object-fit:contain;flex:none}
 h1{font-size:15px;font-weight:700;letter-spacing:-.04em}
 .hsub{font-size:11px;color:var(--g500);letter-spacing:0}
 .prog{position:sticky;top:56px;z-index:19;background:var(--white);border-bottom:1px solid var(--line);padding:10px 20px 12px}
@@ -160,7 +159,7 @@ main{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:18px}
 <body>
 <div class="wrap">
   <header>
-    <div class="logo">LOGO</div>
+    <img class="logo" src="https://static.skmagic.com/pc/asset/images/common/new_logo.png" alt="SK매직" width="68" height="36">
     <div style="flex:1;min-width:0">
       <h1>카톡 배너 생성기</h1>
       <div class="hsub" id="hsub">불러오는 중…</div>
