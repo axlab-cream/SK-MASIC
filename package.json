@@ -6,7 +6,7 @@
   "description": "SK매직 카카오톡 배너 자동생성기 — MC용",
   "scripts": {
     "build": "node 03_engine/build.mjs",
-    "test": "node --test 03_engine/storage.test.mjs",
+    "test": "node --test 03_engine/*.test.mjs",
     "start": "node 03_engine/server.mjs",
     "ui": "node 03_engine/server.mjs",
     "verify": "node 03_engine/verify.mjs",

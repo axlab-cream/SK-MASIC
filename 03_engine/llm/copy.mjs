@@ -55,18 +55,38 @@ export async function generate(input, { apiKey = process.env.OPENAI_API_KEY, mod
 }
 
 /* ── 오프라인 규칙 폴백 (API 키 없이도 PoC가 돌아야 한다) ── */
-const HEAD = {
-  '이사 예정': ['이사하면서 한 번에', '새 집 첫날부터 깨끗하게', '이사 준비 이것부터'],
-  '신혼':      ['시작부터 제대로', '새 살림 기본 3종', '신혼집 필수 구성'],
-  '1인가구':   ['혼자 살아도 제대로', '작은 집에 딱 맞게', '한 대로 충분하게'],
-  '사무실':    ['사무실에도 깨끗한 물', '직원 많은 곳에 맞게', '관리까지 맡기세요'],
+const SCENES = {
+  '이사 예정': {
+    '9월 이사철': ['가을 이사 준비', '새집 가전 구성', '이사 전 설치'],
+    '환절기': ['환절기 이사 준비', '새집 생활 가전', '이사 후 관리'],
+    '추석': ['추석 이사 준비', '명절 새집 맞이', '명절 전 설치'],
+    '연말': ['연말 이사 준비', '새해 새집 가전', '연말 설치 일정'],
+  },
+  '신혼': {
+    '9월 이사철': ['가을 신혼 살림', '둘이 고르는 가전', '신혼집 설치'],
+    '환절기': ['환절기 신혼 살림', '둘의 생활 가전', '신혼집 가전 관리'],
+    '추석': ['첫 명절 살림', '신혼집 손님맞이', '명절 가전 준비'],
+    '연말': ['연말 신혼 살림', '둘의 새해 준비', '신혼 가전 상담'],
+  },
+  '1인가구': {
+    '9월 이사철': ['가을 1인 살림', '혼자 쓰는 가전', '1인 가전 설치'],
+    '환절기': ['환절기 1인 살림', '나의 생활 가전', '1인 가전 관리'],
+    '추석': ['추석 1인 살림', '나를 위한 가전', '명절 전 가전'],
+    '연말': ['연말 1인 살림', '나의 새해 가전', '1인 살림 점검'],
+  },
+  '사무실': {
+    '9월 이사철': ['가을 사무실 가전', '업무 공간 가전', '사무실 설치'],
+    '환절기': ['환절기 사무실', '함께 쓰는 가전', '사무실 가전 관리'],
+    '추석': ['명절 사무실 준비', '연휴 전 가전', '사무실 가전 상담'],
+    '연말': ['연말 사무실 준비', '새해 업무 공간', '사무실 가전 점검'],
+  },
 };
-const SUB_TAIL = {
-  '혜택 강조': '설치비·등록비 면제, 묶음 상담으로 부담 줄이기',
-  '정보 전달': '방문관리로 필터 교체까지 맡기실 수 있습니다',
-  '친근하게': '이사 일정에 맞춰 설치까지 잡아드릴게요',
+const TONES = {
+  '혜택 강조': { endings: ['조건 비교', '구성 비교', '혜택 확인'], ctas: ['조건 상담하기', '구성 문의하기', '혜택 확인하기'] },
+  '정보 전달': { endings: ['살펴보기', '구성 안내', '상담 안내'], ctas: ['제품 상담하기', '구성 확인하기', '상담 예약하기'] },
+  '친근하게': { endings: ['같이 볼까요', '함께 골라요', '물어봐요'], ctas: ['함께 골라보기', '편하게 문의하기', '지금 물어보기'] },
 };
-const CTA = { '혜택 강조': '상담 예약하기', '정보 전달': '견적 받기', '친근하게': '지금 문의하기' };
+const BADGES = { '9월 이사철': '가을 준비', '환절기': '환절기 준비', '추석': '추석 준비', '연말': '새해 준비' };
 
 function cut(s, max) {
   if (s.length <= max) return s;
@@ -82,26 +102,23 @@ function cut(s, max) {
 }
 
 export function fallback({ products, target = '이사 예정', tone = '혜택 강조', season, limits }) {
-  const n = products.length;
   const attrs = p => [p.care, p.feature, p.color].filter(Boolean).join(' · ');
-  const heads = HEAD[target] || HEAD['이사 예정'];
-  const nWord = n > 1 ? `${n}종 ` : '';
+  const scenes = SCENES[target] || SCENES['이사 예정'];
+  const topics = scenes[season] || scenes['9월 이사철'];
+  const voice = TONES[tone] || TONES['혜택 강조'];
   const mk = (angle, head, sub, cta) => {
     const a = screen(cut(head, limits.headline));
     const b = screen(cut(sub, limits.subline));
     return {
       angle, headline: a.text, subline: b.text, cta: cut(cta, limits.cta),
       labels: products.map(p => cut(attrs(p) || p.name, limits.label)),
-      badge: angle === 'benefit' ? (season ? cut(season + ' 혜택', 8) : '단독 혜택') : null,
+      badge: angle === 'benefit' ? BADGES[season] || '가전 준비' : null,
       _screened: [...a.hits, ...b.hits],
     };
   };
   const first = products[0] || {};
-  return [
-    mk('benefit', `${heads[0].replace('한 번에', nWord + '한 번에')}`, SUB_TAIL[tone] || SUB_TAIL['혜택 강조'], CTA[tone] || '상담 예약하기'),
-    mk('scene', heads[1], attrs(first) || '방문관리 · 냉온정 · 화이트', '지금 문의하기'),
-    mk('price', `${nWord ? nWord + '묶음' : '이 제품'} 이렇게 준비했어요`, attrs(first) || '방문관리 · 냉온정 · 화이트', '견적 받기'),
-  ];
+  return ['benefit', 'scene', 'price'].map((angle, i) =>
+    mk(angle, `${topics[i]} ${voice.endings[i]}`, attrs(first) || first.name || '선택 상품 상담', voice.ctas[i]));
 }
 
 // 서버측 재검사 — 프롬프트를 신뢰하지 않는다

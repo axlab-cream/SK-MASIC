@@ -208,7 +208,7 @@ const el = (t, a = {}, ...kids) => {
 };
 const won = n => Number(n || 0).toLocaleString('ko-KR');
 const api = async (p, opt) => { const r = await fetch(p, opt); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; };
-const post = (p, b) => api(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) });
+const post = (p, b, signal) => api(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b), signal });
 
 const icon = { purifier: 'M9 4h34v64H9zM16 20h20M19 34h14v9H19zM26 43v7', air: 'M11 8h30v56H11zM26 22a8 8 0 1 1 0 16 8 8 0 0 1 0-16zM18 52h16',
   bidet: 'M8 18h36v26H8zM18 18v-6h16v6', dish: 'M8 10h36v50H8zM26 19a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM16 48h20',
@@ -217,7 +217,7 @@ const svgFor = k => `<svg width="52" height="72" viewBox="0 0 52 72" fill="none"
 
 const S = { step: 1, tab: 'make', meta: null, mode: 'composite', picked: [], cat: '전체', term: '전체',
   target: '이사 예정', tone: '혜택 강조', season: '9월 이사철',
-  sizeKeys: ['C1350', 'W0800'], primary: 'C1350', copyList: [], copyIdx: 0, copyMeta: null,
+  primary: 'C1350', copyList: [], copyIdx: 0, copyMeta: null, copyError: '',
   session: null, styles: [], styleId: null, finals: [], greeting: '', lib: [], busy: false };
 
 const STEPS = [['상품 선택', '다음 · 문구 선택'], ['문구 선택', '다음 · 스타일'], ['배너 스타일 선택', '다음 · 다운로드'], ['배너 다운로드', '']];
@@ -308,7 +308,7 @@ function stepCopy() {
   const chipRow = (label, key, opts) => el('div', { class: 'sec' },
     el('div', { class: 'cap' }, label),
     el('div', { class: 'chips' }, opts.map(o =>
-      el('button', { class: 'chip', 'aria-pressed': S[key] === o, onclick: () => { S[key] = o; S.copyList = []; render(); } }, o))));
+      el('button', { class: 'chip', 'aria-pressed': S[key] === o, onclick: () => { if (S[key] === o) return; S[key] = o; loadCopy(); } }, o))));
   const sizes = S.meta.sizes;
   return [
     el('div', { class: 'sec' },
@@ -317,19 +317,20 @@ function stepCopy() {
       chipRow('시기', 'season', ['9월 이사철', '환절기', '추석', '연말']),
       chipRow('말투', 'tone', ['혜택 강조', '정보 전달', '친근하게'])),
     el('div', { class: 'sec' },
-      el('div', { class: 'lbl' }, '받을 크기 (배너는 여기서 고른 크기로 나옵니다)'),
+      el('div', { class: 'lbl' }, '받을 크기 (한 가지를 선택해주세요)'),
       el('div', { class: 'chips' }, sizes.map(s =>
-        el('button', { class: 'chip', 'aria-pressed': S.sizeKeys.includes(s.key), onclick: () => {
-          S.sizeKeys = S.sizeKeys.includes(s.key) ? S.sizeKeys.filter(k => k !== s.key) : [...S.sizeKeys, s.key];
-          if (!S.sizeKeys.length) S.sizeKeys = [s.key];
-          S.primary = S.sizeKeys[0]; S.copyList = []; render();
+        el('button', { class: 'chip', 'aria-pressed': S.primary === s.key, onclick: () => {
+          if (S.primary === s.key) return;
+          S.primary = s.key; loadCopy();
         } }, `${s.label} ${s.w}×${s.h}`))),
-      el('div', { class: 'cap' }, `시안은 ${sizes.find(s => s.key === S.primary)?.label} 기준으로 보여주고, 고른 크기 전부를 4단계에서 받습니다.`)),
+      el('div', { class: 'cap' }, `시안과 다운로드 모두 ${sizes.find(s => s.key === S.primary)?.label} 크기로 나옵니다.`)),
     el('div', { class: 'sec' },
       el('div', { style: 'display:flex;align-items:center;gap:8px' },
         el('div', { class: 'lbl' }, '문구 3가지 중에 골라주세요'),
         S.copyMeta ? el('span', { class: 'tag ok' }, S.copyMeta.source === 'openai' ? 'OpenAI 생성' : '규칙 생성') : null,
-        el('button', { class: 'btn gho sm', style: 'margin-left:auto', onclick: loadCopy }, '다시 만들기')),
+        el('button', { class: 'btn gho sm', style: 'margin-left:auto', disabled: S.busy, onclick: loadCopy }, '다시 만들기')),
+      S.copyError ? el('div', { class: 'note', role: 'alert' }, S.copyError,
+        el('button', { class: 'btn gho sm', onclick: loadCopy }, '다시 불러오기')) : null,
       S.busy && !S.copyList.length ? el('div', { class: 'sec' }, [1, 2, 3].map(() =>
         el('div', { class: 'copycard' }, el('div', { class: 'skel', style: 'height:26px;width:70%' }), el('div', { class: 'skel', style: 'height:16px;width:90%' })))) : null,
       ...S.copyList.map((c, i) => el('button', { class: 'copycard', 'aria-pressed': S.copyIdx === i,
@@ -450,7 +451,7 @@ function actions() {
       el('button', { class: 'btn', disabled: !n || S.meta.stale, onclick: () => { S.step = 2; render(); loadCopy(); } }, '다음'));
   } else if (S.step === 2) {
     a.append(el('button', { class: 'btn gho', onclick: () => { S.step = 1; render(); } }, '이전'),
-      sum(S.copyList.length ? `${S.copyIdx + 1}번 문구` : '문구를 만들고 있어요', `${S.sizeKeys.length}개 크기로 받기`),
+      sum(S.copyList.length ? `${S.copyIdx + 1}번 문구` : S.copyError ? '문구를 다시 불러와주세요' : '문구를 만들고 있어요', S.meta.sizes.find(s => s.key === S.primary)?.label || ''),
       el('button', { class: 'btn', disabled: !S.copyList.length || S.busy, onclick: () => { S.step = 3; render(); loadStyles(); } }, '다음'));
   } else if (S.step === 3) {
     const st = S.styles.find(s => s.styleId === S.styleId);
@@ -495,34 +496,50 @@ function render() {
   document.documentElement.style.setProperty('--bar', ($('#actions').offsetHeight || 0) + 'px');
 }
 
-const reset = () => Object.assign(S, { step: 1, picked: [], copyList: [], copyMeta: null, session: null, styles: [], styleId: null, finals: [], greeting: '' });
+const reset = () => {
+  copyRequest++; copyController?.abort();
+  Object.assign(S, { step: 1, picked: [], copyList: [], copyMeta: null, copyError: '', session: null, styles: [], styleId: null, finals: [], greeting: '', busy: false });
+};
 
+let copyRequest = 0, copyController = null;
 async function loadCopy() {
+  const request = ++copyRequest;
+  copyController?.abort();
+  copyController = new AbortController();
+  S.copyList = []; S.copyMeta = null; S.copyError = ''; S.copyIdx = 0;
+  S.styles = []; S.styleId = null; S.finals = []; S.session = null; S.greeting = '';
   setBusy(true);
   try {
-    const r = await post('/api/copy', { productIds: S.picked, target: S.target, tone: S.tone, season: S.season, sizeKey: S.primary });
+    const r = await post('/api/copy', { productIds: S.picked, target: S.target, tone: S.tone, season: S.season, sizeKey: S.primary }, copyController.signal);
+    if (request !== copyRequest) return;
+    if (!Array.isArray(r.usable) || !r.usable.length) throw new Error('사용 가능한 문구가 없습니다');
     S.copyList = r.usable; S.copyMeta = r; S.copyIdx = 0; S.styles = [];
-  } catch (e) { alert('문구 생성 실패: ' + e.message); }
-  setBusy(false);
+  } catch (e) {
+    if (request === copyRequest && e.name !== 'AbortError') S.copyError = '문구를 불러오지 못했어요. 다시 불러오기를 눌러주세요.';
+  } finally { if (request === copyRequest) setBusy(false); }
 }
 async function loadStyles() {
+  const request = copyRequest;
   setBusy(true);
   try {
     const r = await post('/api/render', { productIds: S.picked, copy: S.copyList[S.copyIdx], sizeKey: S.primary,
       consultant: { name: '김○○ MC', phone: '010-0000-0000' }, season: S.season, session: S.session });
+    if (request !== copyRequest) return;
     S.session = r.session; S.styles = r.results;
     S.styleId = r.results.find(x => x.pass)?.styleId || null;
-  } catch (e) { alert('시안 생성 실패: ' + e.message); }
-  setBusy(false);
+  } catch (e) { if (request === copyRequest) alert('시안 생성 실패: ' + e.message); }
+  finally { if (request === copyRequest) setBusy(false); }
 }
 async function loadFinals() {
+  const request = copyRequest;
   setBusy(true);
   try {
-    const r = await post('/api/sizes', { productIds: S.picked, styleId: S.styleId, sizeKeys: S.sizeKeys,
+    const r = await post('/api/sizes', { productIds: S.picked, styleId: S.styleId, sizeKeys: [S.primary],
       target: S.target, tone: S.tone, season: S.season, consultant: { name: '김○○ MC', phone: '010-0000-0000' }, session: S.session });
+    if (request !== copyRequest) return;
     S.finals = r.results; S.greeting = r.greeting;
-  } catch (e) { alert('생성 실패: ' + e.message); }
-  setBusy(false);
+  } catch (e) { if (request === copyRequest) alert('생성 실패: ' + e.message); }
+  finally { if (request === copyRequest) setBusy(false); }
 }
 async function saveLib() {
   const ok = S.finals.filter(f => f.pass);
