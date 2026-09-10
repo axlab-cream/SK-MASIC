@@ -7,6 +7,33 @@ export const smallOnRed = c => (c === '#EA1738' ? '#D9002B' : c);
 // 배너 스타일 6종 = 컬러 테마 × 타이포 × 허용 패턴 (DECISIONS D-14)
 // 값은 SK magic UI Guide 관찰 토큰. 레드 면적 5% 이내 (D-12)
 export const STYLES = {
+  'refine-basic': {
+    name: '리파인 기본형', hint: '레퍼런스 기본 카드 구성 · 단품과 종합 공용', recommended: true,
+    allow: ['S2', 'C3'],
+    bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
+    ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
+    accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
+    priceInk: '#FF641F', badgeBg: '#B6400B', badgeInk: '#FFFFFF',
+    headWeight: 700, headFace: 'kr', band: false, logoPlate: false,
+  },
+  'refine-price': {
+    name: '리파인 가격 강조', hint: '할인 가격을 가장 크게 보여주는 구성',
+    allow: ['S2', 'C3'],
+    bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
+    ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
+    accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
+    priceInk: '#FF641F', priceHero: true, badgeBg: '#B6400B', badgeInk: '#FFFFFF', noticeStrong: true,
+    headWeight: 700, headFace: 'kr', band: false, logoPlate: false,
+  },
+  'refine-benefit': {
+    name: '리파인 혜택 강조', hint: '면제·할인 혜택과 묶음 구성을 함께 보여주는 구성',
+    allow: ['S2', 'C3'],
+    bg: '#FFF8F3', bgGradient: null, imgBg: '#FFFFFF',
+    ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#E9DCD2',
+    accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
+    priceInk: '#FF641F', badgeBg: '#B6400B', badgeInk: '#FFFFFF',
+    headWeight: 700, headFace: 'kr', band: false, chips: true, logoPlate: false,
+  },
   'neutral-white': {
     name: '뉴트럴 화이트', hint: '어디에 보내도 무난 · 기본값', recommended: true,
     allow: ['S1', 'S2', 'S4', 'C2', 'C3', 'C4', 'C6'],

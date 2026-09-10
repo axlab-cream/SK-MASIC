@@ -16,6 +16,7 @@ import { closeBrowser } from './render/shoot.mjs';
 const PORT = Number(process.env.PORT || 5173);
 const OUT = path.join(ROOT, '04_output/ui');
 const LIB = path.join(ROOT, '02_data/library.json');
+const DESIGN_PATTERNS = path.join(ROOT, '02_data/design-patterns.json');
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8', '.png': 'image/png', '.json': 'application/json; charset=utf-8',
   '.woff2': 'font/woff2', '.svg': 'image/svg+xml' };
@@ -73,6 +74,8 @@ export async function handler(req, res) {
     /* ── 메타 ── */
     if (p === '/api/meta') {
       const cat = await catalog();
+      const designPatterns = existsSync(DESIGN_PATTERNS)
+        ? JSON.parse(await readFile(DESIGN_PATTERNS, 'utf8')).families : [];
       const age = cat.syncedAt ? (Date.now() - new Date(cat.syncedAt).getTime()) / 86400000 : null;
       return json(res, 200, {
         products: cat.products, catalogFile: cat._file, syncedAt: cat.syncedAt,
@@ -80,6 +83,7 @@ export async function handler(req, res) {
         sizes: Object.entries(SIZES).map(([k, s]) => ({ key: k, ...s })),
         styles: Object.entries(STYLES).map(([k, s]) => ({ id: k, name: s.name, hint: s.hint,
           recommended: !!s.recommended, requiresIce: !!s.requiresIce })),
+        designPatterns,
         hasOpenAI: !!process.env.OPENAI_API_KEY,
       });
     }

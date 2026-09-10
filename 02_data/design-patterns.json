@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "source": "2026-09-10 디자인 리파인 레퍼런스",
+  "families": [
+    {"id":"single-basic","kind":"single","label":"단품 기본형","reference":"01_단품형3종/01-기본형.png","slots":["campaign","headline","productHero","price","cta","consultant","notice"]},
+    {"id":"single-price","kind":"single","label":"단품 가격 강조형","reference":"01_단품형3종/03-가격강조-A.png","slots":["campaign","headline","priceHero","productHero","cta","consultant","notice"]},
+    {"id":"single-benefit","kind":"single","label":"단품 혜택 강조형","reference":"01_단품형3종/04-혜택강조-A.png","slots":["campaign","headline","benefits","productHero","cta","consultant","notice"]},
+    {"id":"composite-basic","kind":"composite","label":"종합 기본형","reference":"02_종합배너3종_동일콘텐츠/01-기본형.png","slots":["campaign","headline","heroProduct","supportProducts","cta","consultant","notice"]},
+    {"id":"composite-price","kind":"composite","label":"종합 가격 강조형","reference":"03_종합배너3종_콘텐츠보강/03-가격강조-A.png","slots":["campaign","headline","bundlePrice","products","cta","consultant","notice"]},
+    {"id":"composite-benefit","kind":"composite","label":"종합 혜택 강조형","reference":"03_종합배너3종_콘텐츠보강/04-혜택강조-A.png","slots":["campaign","headline","benefitSummary","benefits","products","cta","consultant","notice"]}
+  ]
+}

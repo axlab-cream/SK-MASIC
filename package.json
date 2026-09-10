@@ -7,8 +7,8 @@
   "scripts": {
     "build": "node 03_engine/build.mjs",
     "test": "node --test 03_engine/*.test.mjs",
-    "start": "node 03_engine/server.mjs",
-    "ui": "node 03_engine/server.mjs",
+    "start": "node --env-file-if-exists=.env 03_engine/server.mjs",
+    "ui": "node --env-file-if-exists=.env 03_engine/server.mjs",
     "verify": "node 03_engine/verify.mjs",
     "crawl": "node 03_engine/crawler/pattern.mjs",
     "banner": "node 03_engine/cli.mjs",

@@ -190,6 +190,9 @@ main{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:18px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .empty{border:1px dashed var(--g300);border-radius:var(--r2);padding:26px 18px;text-align:center;
   display:flex;flex-direction:column;gap:9px;align-items:center}
+.zoom{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;width:100%;min-height:42px;border:1px solid var(--g300);border-radius:10px;background:#fff;color:var(--black);font-weight:700}
+.zoom svg{width:18px;height:18px}.preview{position:fixed;inset:0;z-index:100;background:rgba(17,17,17,.88);padding:18px;display:flex;flex-direction:column;gap:12px;align-items:center;overflow:auto}
+.preview[hidden]{display:none}.preview-head{width:min(760px,100%);display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700}.preview-close{min-height:42px;padding:0 14px;border:1px solid rgba(255,255,255,.55);border-radius:10px;color:#fff}.preview img{width:min(760px,100%);height:auto;background:#fff;border-radius:8px}
 </style>
 </head>
 <body>
@@ -228,6 +231,10 @@ main{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:18px}
     </div>
   </div>
 </div>
+<div class="preview" id="preview" hidden role="dialog" aria-modal="true" aria-label="배너 크게 보기">
+  <div class="preview-head"><span id="previewTitle">배너 크게 보기</span><button class="preview-close" id="previewClose">닫기</button></div>
+  <img id="previewImage" alt="선택한 배너 크게 보기">
+</div>
 
 <script type="module">
 const $ = s => document.querySelector(s);
@@ -243,6 +250,9 @@ const el = (t, a = {}, ...kids) => {
   return n;
 };
 const won = n => Number(n || 0).toLocaleString('ko-KR');
+const magnify = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2M11 8v6M8 11h6"/></svg>';
+const openPreview = (src, title) => { $('#previewImage').src = src; $('#previewTitle').textContent = title; $('#preview').hidden = false; $('#previewClose').focus(); };
+const closePreview = () => { $('#preview').hidden = true; $('#previewImage').removeAttribute('src'); };
 const api = async (p, opt) => { const r = await fetch(p, opt); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.status); return j; };
 const post = (p, b, signal) => api(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b), signal });
 
@@ -413,7 +423,7 @@ function stepStyles() {
   return [
     el('div', { class: 'note g' }, '문구·제품·가격은 이미 다 들어가 있습니다. 보기 좋은 것만 골라주세요.'),
     shown.length ? el('div', { class: 'styles' }, shown.map(s =>
-      el('button', { class: 'scard', 'aria-pressed': S.styleId === s.styleId,
+      el('div', {}, el('button', { class: 'scard', 'aria-pressed': S.styleId === s.styleId,
         onclick: () => { S.styleId = s.styleId; render(); } },
         el('div', { class: 'sthumb' }, el('img', { src: `/out/${S.session}/${s.file}`, alt: `${s.name} 시안`, style: 'width:100%;max-width:190px' })),
         el('div', { class: 'srow' }, el('span', { class: 'rad' }), el('span', { class: 'sname' }, s.name),
@@ -423,7 +433,8 @@ function stepStyles() {
           el('span', { class: 'tag' }, s.pattern),
           s.retries ? el('span', { class: 'tag' }, `재시도 ${s.retries}`) : null,
           s.collides ? el('span', { class: 'tag' }, `충돌해소 ${s.collides}`) : null,
-          el('span', { class: 'tag ok' }, '검수 통과'))))) : null,
+          el('span', { class: 'tag ok' }, '검수 통과'))),
+        el('button', { class: 'zoom', onclick: () => openPreview(`/out/${S.session}/${s.file}`, `${s.name} 크게 보기`) , html: magnify + ' 크게 보기' })))) : null,
     !S.busy && !shown.length && S.styles.length ? el('div', { class: 'empty' },
       el('div', { style: 'font-weight:700' }, '보여드릴 시안이 없습니다'),
       el('div', { class: 'cap' }, '검수를 통과한 조합이 없습니다. 문구를 바꾸거나 상품 수를 조정해 보세요.'),
@@ -449,7 +460,7 @@ function stepDownload() {
           el('div', { class: 'tagrow' }, el('span', { class: 'tag ok' }, '검수 통과'), f.retries ? el('span', { class: 'tag' }, `재시도 ${f.retries}`) : null),
           el('div', { style: 'display:flex;gap:8px;flex-wrap:wrap' },
             el('a', { class: 'btn sm', href: `/out/${S.session}/${f.file}`, download: f.file }, '사진 저장'),
-            el('a', { class: 'btn gho sm', href: `/out/${S.session}/${f.file}`, target: '_blank' }, '크게 보기')))))) : null,
+            el('button', { class: 'btn gho sm', onclick: () => openPreview(`/out/${S.session}/${f.file}`, `${f.sizeLabel} 크게 보기`), html: magnify + ' 크게 보기' })))))) : null,
     S.finals.some(f => !f.pass) ? el('div', { class: 'note y' },
       `${S.finals.filter(f => !f.pass).length}개 크기는 검수를 통과하지 못해 제외했습니다 — ` +
       S.finals.filter(f => !f.pass).map(f => `${f.sizeLabel || f.sizeKey}(${f.error || f.failed?.[0]?.label || '실패'})`).join(', ')) : null,
@@ -608,6 +619,9 @@ async function loadLib() { const l = await api('/api/library'); S.lib = l.items 
 $('#tabMake').onclick = () => { S.tab = 'make'; render(); };
 $('#tabLib').onclick = () => { S.tab = 'lib'; loadLib().then(render); };
 $('#btnLib').onclick = () => { S.tab = 'lib'; loadLib().then(render); };
+$('#previewClose').onclick = closePreview;
+$('#preview').onclick = e => { if (e.target === $('#preview')) closePreview(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#preview').hidden) closePreview(); });
 
 (async () => {
   S.meta = await api('/api/meta');
