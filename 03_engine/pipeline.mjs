@@ -63,6 +63,8 @@ export async function renderStyle({ products, usable, styleId, sizeKey, consulta
     const r = await shoot({ products, copy, styleId, sizeKey, patternKey: pat.key, consultant, season, outPath });
     const q = gate({ report: r.report, bytes: r.bytes, noticeText: buildNotice(products),
                      contrastPairs: contrastPairs(styleId, size),
+                     // 아이스 사진 배경은 평면 배너보다 압축 효율이 낮다. 시각 품질을 유지하는 전용 상한을 쓴다.
+                     maxFileKB: STYLES[styleId].requiresIce ? 1500 : undefined,
                      // 템플릿이 조건부 가격을 표시하는 조건과 동일하게 판정한다 (D-33)
                      conditionalPriceShown: products.every(x => x.promoPrice != null && x.promoTerms) });
     last = { pat, copy, r, q }; tries++;

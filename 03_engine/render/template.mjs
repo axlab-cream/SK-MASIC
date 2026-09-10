@@ -29,7 +29,7 @@ const won = n => Number(n).toLocaleString('ko-KR');
  *   어두운 배경용: logo-white.svg → logo-white.png → (없으면 밝은 배경용 파일)
  */
 const LOGODIR = path.resolve(fileURLToPath(new URL('../../01_spec/assets/logo/', import.meta.url)));
-const ICE_BACKGROUND = path.resolve(fileURLToPath(new URL('../../01_spec/assets/backgrounds/ice-campaign-frame.png', import.meta.url)));
+const ICE_BACKGROUND = path.resolve(fileURLToPath(new URL('../../01_spec/assets/backgrounds/ice-campaign-frame.jpg', import.meta.url)));
 function logoFile(onDark) {
   const order = onDark
     ? ['logo-white.svg', 'logo-white.png', 'logo.svg', 'logo.png', 'logo-black.svg', 'logo-black.png']

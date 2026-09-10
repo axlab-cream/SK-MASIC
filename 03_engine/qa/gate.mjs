@@ -7,7 +7,7 @@ const inside = (r, box) => r.x >= box.x - 1 && r.y >= box.y - 1 &&
                            r.x + r.w <= box.x + box.w + 1 && r.y + r.h <= box.y + box.h + 1;
 
 // 8항목 게이트 — 전부 통과해야 MC에게 노출한다 (WORKFLOW [9])
-export function gate({ report, bytes, noticeText, contrastPairs = [], conditionalPriceShown = false }) {
+export function gate({ report, bytes, noticeText, contrastPairs = [], conditionalPriceShown = false, maxFileKB = QA.pngMaxKB }) {
   const { rects, safe, fmin, noticeMin, log } = report;
   const entries = Object.entries(rects);
   const texts = entries.filter(([, r]) => r.kind === 'text');
@@ -71,7 +71,7 @@ export function gate({ report, bytes, noticeText, contrastPairs = [], conditiona
 
   // 7 파일 용량
   const kb = bytes / 1024;
-  add('filesize', '파일 용량', kb <= QA.pngMaxKB, `${kb.toFixed(0)}KB ≤ ${QA.pngMaxKB}KB`);
+  add('filesize', '파일 용량', kb <= maxFileKB, `${kb.toFixed(0)}KB ≤ ${maxFileKB}KB`);
 
   // 8 필수 고지문 4항목 — 렌더된 문장을 우선 검사한다
   const noticeStr = report.noticeText || noticeText || '';
