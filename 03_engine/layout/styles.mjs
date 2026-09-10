@@ -8,7 +8,7 @@ export const smallOnRed = c => (c === '#EA1738' ? '#D9002B' : c);
 export const STYLES = {
   'refine-basic': {
     name: '리파인 기본형', hint: '레퍼런스 기본 카드 구성 · 단품과 종합 공용', recommended: true,
-    allow: ['S2', 'C3'],
+    allow: ['S2', 'C2', 'C3', 'C4', 'C6', 'C12'],
     bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -17,7 +17,7 @@ export const STYLES = {
   },
   'refine-price': {
     name: '리파인 가격 강조', hint: '할인 가격을 가장 크게 보여주는 구성',
-    allow: ['S2', 'C3'],
+    allow: ['S2', 'C2', 'C3', 'C4', 'C6', 'C12'],
     bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -26,7 +26,7 @@ export const STYLES = {
   },
   'refine-benefit': {
     name: '리파인 혜택 강조', hint: '면제·할인 혜택과 묶음 구성을 함께 보여주는 구성',
-    allow: ['S2', 'C3'],
+    allow: ['S2', 'C2', 'C3', 'C4', 'C6', 'C12'],
     bg: '#FFF8F3', bgGradient: null, imgBg: '#FFFFFF',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#E9DCD2',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
