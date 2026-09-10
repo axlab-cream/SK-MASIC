@@ -49,7 +49,7 @@
 
 | ID | 작업 | 상태 | 산출물 |
 |---|---|---|---|
-| P2-01 | 종합 패턴 C2/C3/C4/C6/C12 구현 | DONE | `03_engine/layout/patterns.mjs` |
+| P2-01 | 사용자 등록 종합 패턴 RCB/RCPA/RCPB/RCHA/RCHB/RCPR/RCI 구현 | DONE | 기존 C2/C3/C4/C6/C12 제거, `03_engine/layout/patterns.mjs` |
 | P2-02 | 제품 수 × 규격 → 패턴 결정 | DONE | `03_engine/layout/decide.mjs` |
 | P2-03 | 스타일 테마 6종 토큰 정의 | DONE | `03_engine/layout/styles.mjs` |
 | P2-04 | 겹침 회피 6개 규칙 구현 | DONE | 인페이지 `resolve()` — 실측 rect 기반 |

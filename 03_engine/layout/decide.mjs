@@ -25,7 +25,9 @@ export function candidates({ styleId, sizeKey, n, hasIce }) {
 // 규칙 엔진 1순위 — 세로형은 위→아래, 가로형은 좌→우 흐름을 선호
 export function rank(list, size) {
   const ratio = size.w / size.h;
-  const pref = ratio >= 1.2 ? ['S2', 'C2', 'C3', 'C6', 'C12'] : ratio <= 0.85 ? ['S2', 'C3', 'C6', 'C4', 'C2', 'C12'] : ['S2', 'C4', 'C2', 'C3', 'C6', 'C12'];
+  const pref = ratio >= 1.2 ? ['S2', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI']
+    : ratio <= 0.85 ? ['S2', 'RCHA', 'RCHB', 'RCB', 'RCPA', 'RCPB', 'RCPR', 'RCI']
+    : ['S2', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI'];
   return [...list].sort((a, b) => {
     const ia = pref.indexOf(a.key), ib = pref.indexOf(b.key);
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
