@@ -64,7 +64,10 @@ export function gate({ report, bytes, noticeText, contrastPairs = [], conditiona
 
   // 6 오버플로 · 절삭
   const under = (log || []).filter(l => l.step === 'fitText' && l.belowMin).map(l => l.slot);
-  add('overflow', '텍스트 오버플로 · 절삭', under.length === 0, `${under.length}건${under.length ? ' (' + under.join(',') + ')' : ''}`);
+  const noWrapFail = (report.nowrap || []).filter(n => n.wrapped || n.clipped);
+  const overflowCount = under.length + noWrapFail.length + (report.bannerOverflow ? 1 : 0);
+  add('overflow', '텍스트 오버플로 · 절삭', overflowCount === 0,
+      `${overflowCount}건${under.length ? ' (fit: ' + under.join(',') + ')' : ''}${noWrapFail.length ? ' (한 줄: ' + noWrapFail[0].text + ')' : ''}${report.bannerOverflow ? ' (배너 경계)' : ''}`);
 
   // 7 파일 용량
   const kb = bytes / 1024;

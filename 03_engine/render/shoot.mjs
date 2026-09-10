@@ -58,6 +58,16 @@ export async function shoot(opts) {
   }
 
   const report = await page.evaluate(() => window.__run());
+  // 가격·제품명은 단일 행을 디자인 계약으로 한다. 줄바꿈·세로 절삭은 QA에서 별도로 잡는다.
+  report.nowrap = await page.evaluate(() => [...document.querySelectorAll('[data-nowrap]')].map(el => ({
+    text: el.textContent.trim(),
+    wrapped: el.scrollHeight > el.clientHeight + 1,
+    clipped: el.scrollWidth > el.clientWidth + 1,
+  })));
+  report.bannerOverflow = await page.evaluate(() => {
+    const banner = document.getElementById('banner');
+    return banner.scrollHeight > banner.clientHeight + 1 || banner.scrollWidth > banner.clientWidth + 1;
+  });
   report.images = await page.evaluate(() => [...document.images].map(im => ({
     src: (im.currentSrc || im.src || '').slice(-60), ok: im.naturalWidth > 0 })));
   // QA 는 **화면에 실제로 찍힌** 고지문을 검사해야 한다.
