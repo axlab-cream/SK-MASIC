@@ -25,9 +25,9 @@ export function candidates({ styleId, sizeKey, n, hasIce }) {
 // 규칙 엔진 1순위 — 세로형은 위→아래, 가로형은 좌→우 흐름을 선호
 export function rank(list, size) {
   const ratio = size.w / size.h;
-  const pref = ratio >= 1.2 ? ['S2', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI']
-    : ratio <= 0.85 ? ['S2', 'RCHA', 'RCHB', 'RCB', 'RCPA', 'RCPB', 'RCPR', 'RCI']
-    : ['S2', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI'];
+  const pref = ratio >= 1.2 ? ['RSB', 'RSPA', 'RSPB', 'RSHA', 'RSHB', 'RSPR', 'RSI', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI']
+    : ratio <= 0.85 ? ['RSHA', 'RSHB', 'RSB', 'RSPA', 'RSPB', 'RSPR', 'RSI', 'RCHA', 'RCHB', 'RCB', 'RCPA', 'RCPB', 'RCPR', 'RCI']
+    : ['RSB', 'RSPA', 'RSPB', 'RSHA', 'RSHB', 'RSPR', 'RSI', 'RCB', 'RCPA', 'RCPB', 'RCHA', 'RCHB', 'RCPR', 'RCI'];
   return [...list].sort((a, b) => {
     const ia = pref.indexOf(a.key), ib = pref.indexOf(b.key);
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);

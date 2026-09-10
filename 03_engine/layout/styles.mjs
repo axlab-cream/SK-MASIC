@@ -8,7 +8,7 @@ export const smallOnRed = c => (c === '#EA1738' ? '#D9002B' : c);
 export const STYLES = {
   'refine-basic': {
     name: '리파인 기본형', hint: '레퍼런스 기본 카드 구성 · 단품과 종합 공용', recommended: true,
-    allow: ['S2', 'RCB'],
+    allow: ['RSB', 'RCB'],
     bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -17,7 +17,7 @@ export const STYLES = {
   },
   'refine-price': {
     name: '리파인 가격 강조', hint: '할인 가격을 가장 크게 보여주는 구성',
-    allow: ['S2', 'RCPA'],
+    allow: ['RSPA', 'RCPA'],
     bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -26,7 +26,7 @@ export const STYLES = {
   },
   'refine-benefit': {
     name: '리파인 혜택 강조', hint: '면제·할인 혜택과 묶음 구성을 함께 보여주는 구성',
-    allow: ['S2', 'RCHA'],
+    allow: ['RSHA', 'RCHA'],
     bg: '#FFF8F3', bgGradient: null, imgBg: '#FFFFFF',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#E9DCD2',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -35,7 +35,7 @@ export const STYLES = {
   },
   'refine-premium': {
     name: '리파인 프리미엄형', hint: '고급 제품을 차분하게 강조하는 다크 카드 구성',
-    allow: ['S2', 'RCPR'],
+    allow: ['RSPR', 'RCPR'],
     bg: '#1B1B1B', bgGradient: 'linear-gradient(160deg,#292929 0%,#151515 100%)', imgBg: '#292929',
     ink: '#FFFFFF', sub: '#C2C2C2', faint: '#A6A6A6', line: '#4A4A4A',
     accent: '#BFEAFF', ctaBg: 'transparent', ctaInk: '#FFFFFF', ctaBorder: '#FFFFFF',
@@ -44,7 +44,7 @@ export const STYLES = {
   },
   'refine-price-compare': {
     name: '리파인 가격 비교형', hint: '기준가와 혜택가의 차이를 명확히 보여주는 구성',
-    allow: ['S2', 'RCPB'],
+    allow: ['RSPB', 'RCPB'],
     bg: '#FFFFFF', bgGradient: null, imgBg: '#F7F7F7',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#DEDEDE',
     accent: '#D94E12', ctaBg: '#202020', ctaInk: '#FFFFFF',
@@ -53,7 +53,7 @@ export const STYLES = {
   },
   'refine-benefit-detail': {
     name: '리파인 혜택 상세형', hint: '혜택 항목을 선명하게 정리해 비교하는 구성',
-    allow: ['S2', 'RCHB'],
+    allow: ['RSHB', 'RCHB'],
     bg: '#FFF8F3', bgGradient: null, imgBg: '#FFFFFF',
     ink: '#202020', sub: '#6D6D6D', faint: '#9B9B9B', line: '#E9DCD2',
     accent: '#D94E12', ctaBg: '#D94E12', ctaInk: '#FFFFFF',
@@ -62,7 +62,7 @@ export const STYLES = {
   },
   'refine-ice-campaign': {
     name: '리파인 아이스 캠페인형', hint: '얼음정수기 중심의 시원한 캠페인 구성', requiresIce: true,
-    allow: ['S2', 'RCI'],
+    allow: ['RSI', 'RCI'],
     bg: '#F5FBFF', bgGradient: null, imgBg: '#FFFFFF',
     ink: '#173042', sub: '#466273', faint: '#78909E', line: '#CFE4F1',
     accent: '#1C6F98', ctaBg: '#1C6F98', ctaInk: '#FFFFFF',

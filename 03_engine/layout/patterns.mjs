@@ -1,25 +1,19 @@
-// 배너 패턴은 사용자가 제공한 `03_종합배너3종_콘텐츠보강` 시안만 기준으로 한다.
-// 종합형은 제품 수에 따라 같은 시안의 카드/목록 영역만 확장한다.
-
-const S2 = () => ({
-  headline: [0, 0, 1, 0.19], subline: [0, 0.20, 1, 0.09],
-  products: [[0.14, 0.31, 0.72, 0.44]], cta: [0, 0.78, 0.70, 0.11],
-  brand: [0.73, 0.78, 0.27, 0.11],
-});
-
-const composite = (variant, name) => ({
-  kind: 'refine-composite', n: [2, 12], variant, name,
-  // 종합형은 픽셀 슬롯 조합이 아닌 레퍼런스 카드 구조로 렌더한다.
-  build: () => ({}),
-});
+// 사용자가 등록한 디자인 리파인 시안만 렌더한다. 기존 S*/C* 패턴은 사용하지 않는다.
+const pattern = (kind, variant, name, n) => ({ kind, variant, name, n, build: () => ({}) });
 
 export const PATTERNS = {
-  S2: { kind: 'single', n: [1, 1], build: S2, name: '리파인 단품 기본형' },
-  RCB: composite('basic', '콘텐츠보강 기본형'),
-  RCPA: composite('price-a', '콘텐츠보강 가격 강조 A'),
-  RCPB: composite('price-b', '콘텐츠보강 가격 강조 B'),
-  RCHA: composite('benefit-a', '콘텐츠보강 혜택 강조 A'),
-  RCHB: composite('benefit-b', '콘텐츠보강 혜택 강조 B'),
-  RCPR: composite('premium', '콘텐츠보강 프리미엄형'),
-  RCI: composite('ice', '콘텐츠보강 아이스 캠페인형'),
+  RSB:  pattern('refine-single', 'basic',     '단품 콘텐츠보강 기본형', [1, 1]),
+  RSPA: pattern('refine-single', 'price-a',   '단품 콘텐츠보강 가격 강조 A', [1, 1]),
+  RSPB: pattern('refine-single', 'price-b',   '단품 콘텐츠보강 가격 강조 B', [1, 1]),
+  RSHA: pattern('refine-single', 'benefit-a', '단품 콘텐츠보강 혜택 강조 A', [1, 1]),
+  RSHB: pattern('refine-single', 'benefit-b', '단품 콘텐츠보강 혜택 강조 B', [1, 1]),
+  RSPR: pattern('refine-single', 'premium',   '단품 콘텐츠보강 프리미엄형', [1, 1]),
+  RSI:  pattern('refine-single', 'ice',       '단품 콘텐츠보강 아이스 캠페인형', [1, 1]),
+  RCB:  pattern('refine-composite', 'basic',     '종합 콘텐츠보강 기본형', [2, 12]),
+  RCPA: pattern('refine-composite', 'price-a',   '종합 콘텐츠보강 가격 강조 A', [2, 12]),
+  RCPB: pattern('refine-composite', 'price-b',   '종합 콘텐츠보강 가격 강조 B', [2, 12]),
+  RCHA: pattern('refine-composite', 'benefit-a', '종합 콘텐츠보강 혜택 강조 A', [2, 12]),
+  RCHB: pattern('refine-composite', 'benefit-b', '종합 콘텐츠보강 혜택 강조 B', [2, 12]),
+  RCPR: pattern('refine-composite', 'premium',   '종합 콘텐츠보강 프리미엄형', [2, 12]),
+  RCI:  pattern('refine-composite', 'ice',       '종합 콘텐츠보강 아이스 캠페인형', [2, 12]),
 };

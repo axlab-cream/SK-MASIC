@@ -41,7 +41,7 @@
 | P1-01 | 디자인 토큰 CSS 변수화 (SK guide 값) | DONE | `03_engine/render/template.mjs` |
 | P1-02 | HTML 배너 템플릿 + 슬롯 시스템 | DONE | 같은 파일 |
 | P1-03 | 0~1 정규화 슬롯 → 규격 픽셀 변환기 | DONE | `03_engine/layout/spec.mjs` `toPx()` |
-| P1-04 | 단품 리파인 기준 패턴 S2 구현 | DONE | 구형 S1·S3·S4 제거, `03_engine/layout/patterns.mjs` |
+| P1-04 | 사용자 등록 단품 패턴 RSB/RSPA/RSPB/RSHA/RSHB/RSPR/RSI 구현 | DONE | 기존 S1/S2/S3/S4 제거, `03_engine/layout/patterns.mjs` |
 | P1-05 | Playwright 렌더러 (`fonts.ready` 대기 + rect 수집) | DONE | `03_engine/render/shoot.mjs` |
 | P1-06 | 4규격 전체 산출 검증 | DONE | **단품 15장 · 종합 24장 = 39장, QA 전량 통과** |
 
