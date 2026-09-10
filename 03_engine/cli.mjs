@@ -108,7 +108,7 @@ async function main() {
   const sizeKeys = (arg('sizes', 'C1350,W0800')).split(',').map(s => s.trim()).filter(k => SIZES[k]);
   const styleIds = (arg('styles', Object.keys(STYLES).join(','))).split(',').map(s => s.trim()).filter(k => STYLES[k]);
   const target = arg('target', '이사 예정'), tone = arg('tone', '혜택 강조'), season = arg('season', '9월 이사철');
-  const consultant = { name: arg('consultant', '김○○ MC'), phone: arg('phone', '010-0000-0000') };
+  const consultant = { name: arg('consultant', '김매직 MC'), phone: arg('phone', '010-0000-0000') };
   const hasIce = products.some(p => p.ice);
   const outRoot = path.join(ROOT, '04_output', products.length > 1 ? 'composite' : 'single', stamp());
 

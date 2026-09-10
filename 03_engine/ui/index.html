@@ -596,7 +596,7 @@ async function loadStyles() {
   setBusy(true);
   try {
     const r = await post('/api/render', { productIds: S.picked, copy: S.copyList[S.copyIdx], sizeKey: S.primary,
-      consultant: { name: '김○○ MC', phone: '010-0000-0000' }, season: S.season, session: S.session });
+      consultant: { name: '김매직 MC', phone: '010-0000-0000' }, season: S.season, session: S.session });
     if (request !== copyRequest) return;
     S.session = r.session; S.styles = r.results;
     S.styleId = r.results.find(x => x.pass)?.styleId || null;
@@ -608,7 +608,7 @@ async function loadFinals() {
   setBusy(true);
   try {
     const r = await post('/api/sizes', { productIds: S.picked, styleId: S.styleId, sizeKeys: [S.primary],
-      target: S.target, tone: S.tone, season: S.season, consultant: { name: '김○○ MC', phone: '010-0000-0000' }, session: S.session });
+      target: S.target, tone: S.tone, season: S.season, consultant: { name: '김매직 MC', phone: '010-0000-0000' }, session: S.session });
     if (request !== copyRequest) return;
     S.finals = r.results; S.greeting = r.greeting;
   } catch (e) { if (request === copyRequest) alert('생성 실패: ' + e.message); }
@@ -636,7 +636,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#previ
   S.meta = await api('/api/meta');
   const p = S.meta.products;
   S.picked = p.slice(0, 3).map(x => x.goodsId);
-  $('#hsub').textContent = `김○○ MC · 상품 ${p.length}종` + (S.meta.hasOpenAI ? ' · OpenAI' : ' · 규칙 문구');
+  $('#hsub').textContent = `김매직 MC · 상품 ${p.length}종` + (S.meta.hasOpenAI ? ' · OpenAI' : ' · 규칙 문구');
   await loadLib();
   render();
 })();
