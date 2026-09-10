@@ -49,6 +49,9 @@ h1{font-size:15px;font-weight:700;letter-spacing:-.04em}
 main{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:18px}
 .sec{display:flex;flex-direction:column;gap:10px}
 .lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g500)}
+.search{height:42px;display:flex;align-items:center;gap:9px;padding:0 12px;background:var(--white);border:1px solid var(--line);border-radius:var(--r2);color:var(--g500)}
+.search:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(234,23,56,.10)}
+.search svg{width:18px;height:18px;flex:none}.search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:14px}.search input::placeholder{color:var(--g500)}
 .cap{font-size:12px;color:var(--g600)}
 .note{border-radius:var(--r2);padding:12px 14px;display:flex;gap:10px;font-size:13px;line-height:1.55}
 .note.g{background:var(--surface);color:var(--g700)} .note.r{background:#FDECEF;color:#A50E27}
@@ -261,7 +264,7 @@ const icon = { purifier: 'M9 4h34v64H9zM16 20h20M19 34h14v9H19zM26 43v7', air: '
   range: 'M6 16h40v34H6zM17 23a5 5 0 1 1 0 10 5 5 0 0 1 0-10zM35 23a5 5 0 1 1 0 10 5 5 0 0 1 0-10zM13 42h26', bed: 'M4 26h44v20H4zM4 34h44M12 26v-8h24v8' };
 const svgFor = k => `<svg width="52" height="72" viewBox="0 0 52 72" fill="none" stroke="#C8C8C8" stroke-width="2.2" stroke-linecap="round"><path d="${icon[k] || icon.purifier}"/></svg>`;
 
-const S = { step: 1, tab: 'make', meta: null, mode: 'composite', picked: [], cat: '전체', term: '전체',
+const S = { step: 1, tab: 'make', meta: null, mode: 'composite', picked: [], cat: '전체', term: '전체', query: '',
   target: '이사 예정', tone: '혜택 강조', season: '9월 이사철',
   primary: 'C1350', copyList: [], copyIdx: 0, copyMeta: null, copyError: '',
   session: null, styles: [], styleId: null, finals: [], greeting: '', lib: [], busy: false };
@@ -283,9 +286,11 @@ function stepProducts() {
   const m = S.meta, cats = ['전체', ...new Set(m.products.map(p => p.category || '기타'))];
   // 약정이 섞이면 배너에서 가격이 아예 숨겨진다. 고르는 단계에서 미리 걸러줘야 MC 가 헛수고하지 않는다.
   const terms = [...new Set(m.products.map(p => p.term).filter(Boolean))].sort((a, b) => a - b);
+  const q = S.query.trim().toLowerCase();
   const list = m.products.filter(p =>
     (S.cat === '전체' || (p.category || '기타') === S.cat) &&
-    (S.term === '전체' || p.term === S.term));
+    (S.term === '전체' || p.term === S.term) &&
+    (!q || [p.name, p.model, p.category, p.care, p.feature, p.color].filter(Boolean).join(' ').toLowerCase().includes(q)));
   const maxN = S.mode === 'single' ? 1 : 12;
   const pickedTerms = [...new Set(S.picked.map(id => m.products.find(x => x.goodsId === id)?.term).filter(Boolean))];
   const mixed = pickedTerms.length > 1;
@@ -298,7 +303,10 @@ function stepProducts() {
     m.stale ? el('div', { class: 'note r' }, `카탈로그가 ${m.catalogAgeDays}일 지났습니다 — 가격이 바뀌었을 수 있어 배너 생성이 차단됩니다. 먼저 npm run crawl 로 갱신하세요.`) : null,
     m.catalogFile?.includes('sample') ? el('div', { class: 'note y' }, '샘플 카탈로그입니다. 실제 상품·가격은 npm run crawl → npm run catalog 로 수집하세요.') : null,
     el('div', { class: 'sec' },
-      el('div', { class: 'lbl' }, '배너 유형'),
+      el('label', { class: 'search', for: 'productSearch' },
+        el('svg', { viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '2', 'stroke-linecap': 'round', html: '<circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path>' }),
+        el('input', { id: 'productSearch', type: 'search', value: S.query, placeholder: '상품명 또는 모델명 검색', 'aria-label': '상품 검색', oninput: e => { S.query = e.target.value; render(); requestAnimationFrame(() => { const input = $('#productSearch'); input?.focus(); input?.setSelectionRange(S.query.length, S.query.length); }); } }),
+      ),
       el('div', { class: 'seg' },
         el('button', { 'aria-pressed': S.mode === 'single', onclick: () => { S.mode = 'single'; S.picked = S.picked.slice(0, 1); render(); } }, '단품 배너'),
         el('button', { 'aria-pressed': S.mode === 'composite', onclick: () => { S.mode = 'composite'; render(); } }, '종합 배너 · 2~12종')),
@@ -319,6 +327,7 @@ function stepProducts() {
             S.picked = S.picked.filter(id => S.meta.products.find(x => x.goodsId === id)?.term === keepTerm);
             S.term = keepTerm; S.copyList = []; render();
           } }, `${keepTerm}년 약정만 남기기`)) : null,
+      !list.length ? el('div', { class: 'note g' }, '검색 조건에 맞는 상품이 없습니다. 상품명 또는 모델명을 다시 확인해 주세요.') : null,
       el('div', { class: 'grid' }, list.map(p => {
         const on = S.picked.includes(p.goodsId);
         const idx = S.picked.indexOf(p.goodsId);
