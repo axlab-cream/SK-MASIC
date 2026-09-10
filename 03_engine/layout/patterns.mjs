@@ -12,20 +12,7 @@ const grid = (n, cols, x, y, w, h, gap = 0.03) => {
   });
 };
 
-/* ── 단품 S1~S4 ─────────────────────────────────────────── */
-const S1 = () => ({                       // hero-right / text-left
-  headline: [0, 0, 0.52, 0.30],
-  subline:  [0, 0.32, 0.52, 0.12],
-  cta:      [0, 0.70, 0.52, 0.14],
-  brand:    [0, 0.86, 0.52, 0.12],
-  products: [[0.56, 0.02, 0.44, 0.84]],
-});
-const S4 = () => {                        // S1 미러
-  const s = S1();
-  const mir = r => [1 - r[0] - r[2], r[1], r[2], r[3]];
-  return { headline: mir(s.headline), subline: mir(s.subline), cta: mir(s.cta),
-           brand: mir(s.brand), products: s.products.map(mir) };
-};
+/* ── 단품 S2: 리파인 기준 패턴 ───────────────────────────── */
 const S2 = () => ({                       // text-top / hero-bottom
   headline: [0, 0, 1, 0.19],
   subline:  [0, 0.20, 1, 0.09],
@@ -33,14 +20,6 @@ const S2 = () => ({                       // text-top / hero-bottom
   cta:      [0, 0.78, 0.70, 0.11],
   brand:    [0.73, 0.78, 0.27, 0.11],
 });
-const S3 = () => ({                       // hero-center / band-overlay
-  products: [[0.05, 0.16, 0.90, 0.50]],
-  headline: [0, 0, 1, 0.14], band: 'headline',
-  subline:  [0, 0.69, 1, 0.08],
-  cta:      [0, 0.78, 0.60, 0.12],
-  brand:    [0.63, 0.78, 0.37, 0.12],
-});
-
 /* ── 종합 C2~C12 ────────────────────────────────────────── */
 const C2 = () => ({
   headline: [0, 0, 1, 0.17],
@@ -79,10 +58,7 @@ const C12 = n => ({                       // 행 단위 리스트 — 겹침이 
 });
 
 export const PATTERNS = {
-  S1: { kind: 'single', n: [1, 1], build: S1,  name: 'hero-right / text-left' },
   S2: { kind: 'single', n: [1, 1], build: S2,  name: 'text-top / hero-bottom' },
-  S3: { kind: 'single', n: [1, 1], build: S3,  name: 'hero-center / band-overlay' },
-  S4: { kind: 'single', n: [1, 1], build: S4,  name: 'hero-left / text-right' },
   C2: { kind: 'composite', n: [2, 2],  build: C2,  name: 'duo-split' },
   C3: { kind: 'composite', n: [3, 3],  build: C3,  name: 'hero + 2' },
   C4: { kind: 'composite', n: [4, 4],  build: C4,  name: 'grid 2x2' },
