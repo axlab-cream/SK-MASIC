@@ -1,0 +1,90 @@
+# Daily catalog refresh - keeps 02_data/catalog/products.json under the 7-day
+# staleness limit enforced by 03_engine/server.mjs. The deployed Vercel app has
+# no way to run the Playwright crawler itself, so it runs here and the commit
+# triggers a Vercel redeploy.
+name: catalog-refresh
+
+on:
+  schedule:
+    # 18:00 UTC == 03:00 KST (next day). Daily, before business hours.
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Record previous product count
+        id: before
+        run: |
+          count=$(node -e "try{console.log(JSON.parse(require('fs').readFileSync('02_data/catalog/products.json','utf8')).products.length)}catch{console.log(0)}")
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Previous catalog: $count products"
+
+      - name: Crawl product patterns
+        run: npm run crawl
+
+      - name: Build catalog
+        run: npm run catalog
+
+      - name: Validate refreshed catalog
+        env:
+          PREV: ${{ steps.before.outputs.count }}
+        run: |
+          node -e "
+            const fs = require('fs');
+            const prev = Number(process.env.PREV) || 0;
+            const cat = JSON.parse(fs.readFileSync('02_data/catalog/products.json', 'utf8'));
+            const n = cat.products?.length ?? 0;
+            const ageDays = (Date.now() - new Date(cat.syncedAt).getTime()) / 86400000;
+            console.log('products=' + n + ' prev=' + prev + ' ageDays=' + ageDays.toFixed(2));
+            // A crawl that silently loses most of the catalog is a scrape failure,
+            // not a real product delisting. Refuse to publish it.
+            if (n < 20) throw new Error('catalog too small: ' + n + ' products');
+            if (prev > 0 && n < prev * 0.8) throw new Error('catalog shrank ' + prev + ' -> ' + n + ' (>20% loss)');
+            if (!(ageDays < 1)) throw new Error('syncedAt is not fresh: ' + cat.syncedAt);
+          "
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add 02_data/catalog/products.json
+          # Chromium re-encodes every trimmed PNG a few bytes differently on each
+          # run, so staging modified assets would rewrite ~90 blobs (~5 MB) nightly
+          # for no visual change. Only genuinely new product images are committed;
+          # refresh existing artwork with a manual `npm run catalog`.
+          new_assets=$(git ls-files --others --exclude-standard 02_data/assets)
+          if [ -n "$new_assets" ]; then
+            echo "$new_assets" | xargs git add --
+            echo "New product images:"; echo "$new_assets"
+          fi
+          if git diff --cached --quiet; then
+            echo 'Catalog unchanged - nothing to commit.'
+            exit 0
+          fi
+          git commit -m 'chore(catalog): daily refresh from skmagic.com'
+          git push
