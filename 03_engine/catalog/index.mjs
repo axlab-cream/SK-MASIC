@@ -7,7 +7,7 @@ import path from 'node:path';
 import { loadSchema, validateCatalog } from './validate.mjs';
 import { loadOverride, applyOverride } from './override.mjs';
 import { trimOne } from './trim.mjs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
@@ -42,6 +42,32 @@ async function fetchImage(url, dst) {
   finally { clearTimeout(t); }
 }
 
+/**
+ * 조건부 가격을 제자리에 놓는다 (D-33).
+ *
+ * 상세 페이지는 두 가지 모양으로 조건부 가격을 보여준다.
+ *   A) "최종 할인가" 라벨이 있다 → promoPrice 가 조건부, sale 은 조건 종료 후 상시가
+ *   B) 라벨이 없고 "기본 할인가" 자체가 조건부다 (워커힐 매트리스·프레임 11종)
+ *        기본 할인가 월 11,450원
+ *        "6개월간 청구되는 구독료이며, 7개월차부터 할인 구독료 월 22,900원이 청구됩니다"
+ *
+ * B 를 그대로 두면 11,450 원이 상시가로 배너에 실리고 필수 고지 문장도 빠진다 —
+ * 실제 7개월차 부담액의 절반이다. 조건부 값을 promoPrice 로, 조건 종료 후 가격을
+ * sale 로 옮겨 A 와 같은 모양으로 맞춘다. compliance.priceTiers 가 그때부터
+ * hero 를 조건부로 표시하고 notice() 가 기간·이후 금액을 고지한다.
+ *
+ * 값을 만들어내지는 않는다. 조건 문장이 스스로 말한 금액만 쓰고,
+ * 위계(조건부 < 상시가 <= 기준 구독료)가 맞을 때만 옮긴다.
+ */
+export function placeConditionalPrice(r) {
+  const { base, sale, promoPrice, promoTerms } = r;
+  if (promoPrice != null || !promoTerms || sale == null) return { sale, promoPrice, promoTerms };
+  const after = promoTerms.afterPrice;
+  const ok = after != null && after > sale && (base == null || after <= base);
+  if (!ok) return { sale, promoPrice: null, promoTerms: null };
+  return { sale: after, promoPrice: sale, promoTerms };
+}
+
 async function main() {
   const src = await pickHarvest();
   const h = JSON.parse(await readFile(src, 'utf8'));
@@ -60,6 +86,7 @@ async function main() {
 
   const products = [];
   for (const r of h.products || []) {
+    const cp = placeConditionalPrice(r);
     const p = {
       goodsId: r.goodsId,
       model: r.model || null,
@@ -73,11 +100,11 @@ async function main() {
       ice: /얼음|아이스|ICE/i.test([r.name, r.feature, r.category, r.filterKey].join(' ')),
       // 수확기가 라벨 앵커로 확정한 값만 싣는다. 라벨을 못 찾았으면 null 로 남는다 (D-02)
       base: r.base ?? null,
-      sale: r.sale ?? null,
+      sale: cp.sale ?? null,
       partner: null,
       // 최종 할인가는 조건부다. 조건(promoTerms)이 없으면 가격 자체를 버린다 (D-33)
-      promoPrice: (r.promoPrice != null && r.promoTerms) ? r.promoPrice : null,
-      promoTerms: (r.promoPrice != null && r.promoTerms) ? r.promoTerms : null,
+      promoPrice: (cp.promoPrice != null && cp.promoTerms) ? cp.promoPrice : null,
+      promoTerms: (cp.promoPrice != null && cp.promoTerms) ? cp.promoTerms : null,
       partnerMax: r.partnerMax ?? null,
       careCycle: r.careCycle ?? null,
       obligMonths: r.obligMonths ?? null,
@@ -142,5 +169,7 @@ async function main() {
   return { out, kept: kept.length, dropped: dropped.length };
 }
 
-main().then(async () => { const { closeBrowser } = await import('../render/shoot.mjs'); await closeBrowser(); })
-  .catch(async e => { console.error('✗ ' + e.message); try { const { closeBrowser } = await import('../render/shoot.mjs'); await closeBrowser(); } catch {} process.exit(1); });
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().then(async () => { const { closeBrowser } = await import('../render/shoot.mjs'); await closeBrowser(); })
+    .catch(async e => { console.error('✗ ' + e.message); try { const { closeBrowser } = await import('../render/shoot.mjs'); await closeBrowser(); } catch {} process.exit(1); });
+}

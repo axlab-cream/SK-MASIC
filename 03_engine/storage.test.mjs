@@ -40,7 +40,12 @@ test('API serves catalog and rejects invalid generation requests', async () => {
   const base = `http://127.0.0.1:${server.address().port}`;
   try {
     const meta = await (await fetch(`${base}/api/meta`)).json();
-    assert.equal(meta.products.length, 92);
+    // 상품 수는 SK매직 라인업이 바뀔 때마다 달라진다. 숫자를 박아두면 크롤이 정상일 때도
+    // 테스트가 깨진다 — API 가 카탈로그 파일을 그대로 서빙하는지만 확인한다.
+    const catalog = JSON.parse(await readFile(new URL('../02_data/catalog/products.json', import.meta.url), 'utf8'));
+    assert.equal(meta.products.length, catalog.products.length);
+    assert.ok(meta.products.length > 20, `카탈로그가 너무 작다 (${meta.products.length}종)`);
+    assert.equal(meta.stale, false, '카탈로그가 7일을 넘기면 배너 생성이 차단된다');
     for (const route of ['copy', 'render', 'sizes']) {
       const result = await fetch(`${base}/api/${route}`, { method: 'POST', body: '{}' });
       assert.equal(result.status, 400);

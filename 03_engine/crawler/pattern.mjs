@@ -25,13 +25,20 @@ const won = s => { const n = Number(String(s).replace(/[^0-9]/g, '')); return Nu
  *   최종 할인가   → 월 25,950 원      promo  (조건부 — 아래 문장이 따라붙는다)
  *   "구독료 납부 월부터 18개월간 청구되는 구독료이며, 19개월차부터 할인 구독료 월 51,900원이 청구됩니다."
  */
-function extractPrices(text, labels) {
+export function extractPrices(text, labels) {
   const after = (label, span = 80) => {
     const i = text.indexOf(label);
     if (i < 0) return null;
     const seg = text.slice(i + label.length, i + label.length + span);
     const m = seg.match(/월\s*([0-9]{1,3}(?:,[0-9]{3})+)\s*원/);
-    return m ? won(m[1]) : null;
+    if (!m) return null;
+    // 이 라벨의 값이 아직 안 그려졌으면 정규식은 **다음 섹션**의 금액을 집는다.
+    // 라벨과 금액 사이에 다른 가격 라벨이 끼어 있으면 그 금액은 내 값이 아니다.
+    const between = seg.slice(0, m.index);
+    for (const other of Object.values(labels)) {
+      if (other !== label && between.includes(other)) return null;
+    }
+    return won(m[1]);
   };
   const base  = after(labels.base);
   const sale  = after(labels.sale);
@@ -57,15 +64,23 @@ const COLOR_WORD = /(화이트|블랙|베이지|그레이|실버|아이보리|�
  * 실제로 같은 상품이 실행마다 sale 43,900 / 21,950 로 달라졌다.
  * 그래서 (1) 두 번 연속 같은 결과가 나올 때까지 다시 읽고, (2) 값의 모양을 검사한다.
  */
-function priceShapeOk(pr, text, labels) {
+export function priceShapeOk(pr, text, labels) {
   const { base, sale, promo, promoTerms } = pr;
-  // 최종 할인가 라벨이 페이지에 있는데 조건을 못 읽었다면 그 페이지는 아직 덜 그려진 것이다
-  if (text.includes(labels.promo) && !(promo != null && promoTerms)) return false;
   // 위계가 뒤집히면 잘못 읽은 것이다
   if (base != null && sale != null && sale > base) return false;
   if (sale != null && promo != null && promo > sale) return false;
-  // 최종 할인가가 있으면 sale 은 그것과 달라야 한다 (같으면 같은 값을 두 번 읽은 것)
-  if (promo != null && sale != null && promo === sale && text.includes(labels.sale)) return false;
+  // 라벨이 그려졌는데 값이 비어 있으면 그 페이지는 아직 덜 그려진 것이다.
+  // (after() 가 다음 섹션 금액을 거부하고 null 을 준 경우도 여기로 걸린다)
+  if (text.includes(labels.base) && base == null) return false;
+  if (text.includes(labels.sale) && sale == null) return false;
+  if (text.includes(labels.promo)) {
+    if (promo == null) return false;
+    // 최종 할인가 == 기본 할인가 → 조건부 프로모션이 **없는** 상품이다. 조건 문장도 없는 게 맞다.
+    //   (2026-09-15 실측: 디아트 공기청정기·풀스텐 비데 16종이 이 모양이다)
+    // 최종 할인가 <  기본 할인가 → 조건부이므로 조건 문장이 반드시 따라와야 한다 (D-33).
+    // 값을 두 번 읽어 생긴 가짜 동일값은 after() 가 라벨 사이 검사로 막는다.
+    if (sale != null && promo < sale && !promoTerms) return false;
+  }
   return true;
 }
 
@@ -175,9 +190,14 @@ export async function harvest({ configPath, outDir, limitPerCategory = 0, headle
       // networkidle 은 이 사이트에서 신뢰할 수 없다 (분석 스크립트가 네트워크를 계속 붙잡는다).
       // DOM 만 받고, 우리가 실제로 필요한 **가격 라벨이 나타날 때까지** 기다린다.
       let text = null, title = null, stable = true;
+      let retired = false;
       for (let attempt = 0; attempt < 2 && text == null; attempt++) {
         try {
           await page.goto(u, { waitUntil: 'domcontentloaded', timeout: 45000 });
+          // 단종 상품은 상세 페이지가 없고 /main 으로 넘긴다. 그대로 두면 홈페이지를
+          // 상품으로 파싱해 name "몰" · 가격 null 인 유령 레코드가 실린다 (G000068402).
+          // goodsId 로 판정한다. 경로 이름(indexGoodsDetail)은 대소문자를 틀리기 쉽다.
+          if (!page.url().includes(goodsId)) { retired = true; break; }
           // 가격 블록이 다 그려질 때까지 기다린다. 기준 구독료 라벨만으로는 부족했다 —
           // 값이 비동기로 채워지므로 **가격 블록 끝(방문주기/의무사용 줄)** 까지 기다린다.
           await page.waitForFunction(
@@ -194,6 +214,11 @@ export async function harvest({ configPath, outDir, limitPerCategory = 0, headle
           console.warn(`  ~ ${goodsId} 1차 실패, 재시도`);
           await sleep(1500);
         }
+      }
+      if (retired) {
+        console.warn(`  - ${goodsId} 단종 — 상세 페이지가 /main 으로 넘어감, 제외`);
+        await sleep(delay);
+        continue;
       }
       const pick = (k, i = 0) => { fp[k].lastIndex = 0; const m = fp[k].exec(text); return m ? (m[i] ?? m[0]) : null; };
       const t = parseTitle(title);

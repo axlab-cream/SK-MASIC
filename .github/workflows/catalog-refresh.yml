@@ -66,6 +66,15 @@ jobs:
             if (n < 20) throw new Error('catalog too small: ' + n + ' products');
             if (prev > 0 && n < prev * 0.8) throw new Error('catalog shrank ' + prev + ' -> ' + n + ' (>20% loss)');
             if (!(ageDays < 1)) throw new Error('syncedAt is not fresh: ' + cat.syncedAt);
+            // Price extraction can degrade without losing products: label changes on the
+            // detail page leave records intact but priceless, and those banners silently
+            // fall back to '상담 시 안내'. Fail loudly instead of publishing that.
+            const unpriced = cat.products.filter(p => p.needsPriceConfirm).length;
+            console.log('unpriced=' + unpriced);
+            if (unpriced > n * 0.1) {
+              throw new Error('too many products without a confirmed price: ' + unpriced + '/' + n
+                + ' - check the 기준 구독료 / 기본 할인가 / 최종 할인가 labels in 03_engine/crawler/patterns.config.json');
+            }
           "
 
       - name: Commit and push if changed
