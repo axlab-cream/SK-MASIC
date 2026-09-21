@@ -33,7 +33,7 @@ const sys = `너는 SK매직 렌탈 상품의 카카오톡 배너 문구를 쓴�
 5. cta 는 구체적 동작 하나. "자세히 보기" 같은 모호한 표현 금지.
 6. 각 필드는 주어진 최대 글자수를 넘지 않는다.`;
 
-export async function generate(input, { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_COPY || 'gpt-5.1' } = {}) {
+export async function generate(input, { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_COPY || 'gpt-5.6-luna' } = {}) {
   if (!apiKey) return { source: 'fallback', candidates: fallback(input) };
   try {
     const res = await fetch('https://api.openai.com/v1/chat/completions', {

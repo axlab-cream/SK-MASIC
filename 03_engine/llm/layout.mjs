@@ -19,7 +19,7 @@ const sys = `너는 배너 레이아웃 패턴을 고른다. 주어진 후보 �
  * @returns {{pick:string, reason:string, source:'openai'|'rule'}}
  */
 export async function advise({ candidates, size, products, copy },
-  { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_LAYOUT || 'gpt-5.1-mini' } = {}) {
+  { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_LAYOUT || 'gpt-5.6-luna' } = {}) {
   const keys = candidates.map(c => c.key);
   const ruleAnswer = { pick: keys[0], reason: '규칙 엔진 1순위', source: 'rule' };
   if (!apiKey || keys.length < 2) return ruleAnswer;
