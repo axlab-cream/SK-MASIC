@@ -15,11 +15,13 @@ const sys = `너는 배너 레이아웃 패턴을 고른다. 주어진 후보 �
 3. 대표 제품 강조 — HERO 가 가격·부피에서 두드러지면 큰 슬롯을 주는 패턴
 후보에 없는 key 를 고르면 안 된다. 좌표나 크기를 만들지 않는다.`;
 
+export const DEFAULT_LAYOUT_MODEL = 'gpt-5.6-luna';
+
 /**
  * @returns {{pick:string, reason:string, source:'openai'|'rule'}}
  */
 export async function advise({ candidates, size, products, copy },
-  { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_LAYOUT || 'gpt-5.6-luna' } = {}) {
+  { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL_LAYOUT || DEFAULT_LAYOUT_MODEL } = {}) {
   const keys = candidates.map(c => c.key);
   const ruleAnswer = { pick: keys[0], reason: '규칙 엔진 1순위', source: 'rule' };
   if (!apiKey || keys.length < 2) return ruleAnswer;

@@ -3,6 +3,8 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import { DEFAULT_COPY_MODEL } from './llm/copy.mjs';
+import { DEFAULT_LAYOUT_MODEL } from './llm/layout.mjs';
 
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const rows = [];
@@ -95,7 +97,8 @@ await probe('static CDN', (process.env.SKMAGIC_CDN || 'https://static.skmagic.co
 
 /* OpenAI */
 process.env.OPENAI_API_KEY
-  ? ok('OpenAI', `키 있음 · 모델 ${process.env.OPENAI_MODEL_COPY || 'gpt-5.1'}`)
+  ? ok('OpenAI', `키 있음 · 문구 ${process.env.OPENAI_MODEL_COPY || DEFAULT_COPY_MODEL}`
+       + ` · 레이아웃 ${process.env.OPENAI_MODEL_LAYOUT || DEFAULT_LAYOUT_MODEL}`)
   : warn('OpenAI', '키 없음 — 문구는 규칙 폴백으로 생성됨 (동작에는 문제 없음)');
 
 /* 출력 */
