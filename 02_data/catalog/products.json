@@ -1,6 +1,6 @@
 {
-  "syncedAt": "2026-10-27T21:50:26.729Z",
-  "source": "harvest-20261027.json (패턴 수확)",
+  "syncedAt": "2026-10-28T22:13:51.828Z",
+  "source": "harvest-20261028.json (패턴 수확)",
   "note": "가격이 null 인 항목은 needsPriceConfirm=true 다. 오버라이드 CSV 로 확정한다.",
   "products": [
     {
@@ -49,7 +49,7 @@
       "image": "02_data/assets/trimmed/G000069931.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069931",
-      "harvestedAt": "2026-10-27T21:41:15.306Z",
+      "harvestedAt": "2026-10-28T22:05:45.835Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -79,7 +79,11 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 mini | 구독 | 방문관리, 냉온정얼음, 오트밀 베이지 | WPUIAC606SOB | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         65900
       ],
@@ -99,7 +103,7 @@
       "image": "02_data/assets/trimmed/G000070092.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070092",
-      "harvestedAt": "2026-10-27T21:41:20.894Z",
+      "harvestedAt": "2026-10-28T22:05:51.792Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -110,7 +114,7 @@
       "kind": "purifier",
       "care": "방문관리",
       "feature": "냉온정얼음",
-      "color": null,
+      "color": "내추럴 화이트",
       "term": 7,
       "ice": true,
       "base": 65900,
@@ -129,7 +133,11 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 mini | 구독 | 방문관리, 냉온정얼음, 애쉬 블루 | WPUIAC606SSB | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         65900
       ],
@@ -149,7 +157,7 @@
       "image": "02_data/assets/trimmed/G000070093.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070093",
-      "harvestedAt": "2026-10-27T21:41:26.920Z",
+      "harvestedAt": "2026-10-28T22:05:57.387Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -203,7 +211,7 @@
       "image": "02_data/assets/trimmed/G000070085.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070085",
-      "harvestedAt": "2026-10-27T21:41:33.099Z",
+      "harvestedAt": "2026-10-28T22:06:02.789Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -257,7 +265,7 @@
       "image": "02_data/assets/trimmed/G000070086.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070086",
-      "harvestedAt": "2026-10-27T21:41:38.924Z",
+      "harvestedAt": "2026-10-28T22:06:08.161Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -287,6 +295,10 @@
       "sizes": null,
       "title": "PSG 원코크 플러스 얼음물 정수기 | 구독 | 방문관리, 냉온정얼음, 내추럴 화이트 | WPUIAC425PPW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
         25450,
         50900,
         68900
@@ -307,7 +319,7 @@
       "image": "02_data/assets/trimmed/G000070087.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070087",
-      "harvestedAt": "2026-10-27T21:41:45.098Z",
+      "harvestedAt": "2026-10-28T22:06:13.709Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -361,7 +373,7 @@
       "image": "02_data/assets/trimmed/G000070088.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070088",
-      "harvestedAt": "2026-10-27T21:41:50.948Z",
+      "harvestedAt": "2026-10-28T22:06:19.133Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -391,6 +403,11 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 | 구독 | 방문관리, 냉온정얼음, 내추럴 화이트 | WPUIAC506SNW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
+        25450,
         27450,
         54900,
         73900
@@ -411,7 +428,7 @@
       "image": "02_data/assets/trimmed/G000070089.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070089",
-      "harvestedAt": "2026-10-27T21:41:56.312Z",
+      "harvestedAt": "2026-10-28T22:06:24.587Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -465,7 +482,7 @@
       "image": "02_data/assets/trimmed/G000070091.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070091",
-      "harvestedAt": "2026-10-27T21:42:02.272Z",
+      "harvestedAt": "2026-10-28T22:06:30.421Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -520,7 +537,7 @@
       "image": "02_data/assets/trimmed/G000070090.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070090",
-      "harvestedAt": "2026-10-27T21:42:08.607Z",
+      "harvestedAt": "2026-10-28T22:06:35.722Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -575,7 +592,7 @@
       "image": "02_data/assets/trimmed/G000069932.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069932",
-      "harvestedAt": "2026-10-27T21:42:14.920Z",
+      "harvestedAt": "2026-10-28T22:06:41.124Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -630,7 +647,7 @@
       "image": "02_data/assets/trimmed/G000069934.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069934",
-      "harvestedAt": "2026-10-27T21:42:20.585Z",
+      "harvestedAt": "2026-10-28T22:06:46.840Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -660,6 +677,11 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 | 구독 | 방문관리, 냉온정얼음, 내추럴 화이트 | WPUIAC506SNW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
+        25450,
         25950,
         51900,
         70900
@@ -680,7 +702,7 @@
       "image": "02_data/assets/trimmed/G000069846.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069846",
-      "harvestedAt": "2026-10-27T21:42:26.553Z",
+      "harvestedAt": "2026-10-28T22:06:52.270Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -710,7 +732,11 @@
       "sizes": null,
       "title": "투워터 정수기 | 구독 | 셀프관리, 냉온정, 화이트 | WPUMAC306SWH | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
         17950,
+        23450,
+        25450,
         35900,
         57900
       ],
@@ -730,7 +756,7 @@
       "image": "02_data/assets/trimmed/G000069844.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069844",
-      "harvestedAt": "2026-10-27T21:42:32.571Z",
+      "harvestedAt": "2026-10-28T22:06:57.369Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -785,7 +811,7 @@
       "image": "02_data/assets/trimmed/G000069933.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069933",
-      "harvestedAt": "2026-10-27T21:42:38.824Z",
+      "harvestedAt": "2026-10-28T22:07:03.061Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -796,7 +822,7 @@
       "kind": "purifier",
       "care": "셀프관리",
       "feature": "냉온정얼음",
-      "color": null,
+      "color": "내추럴 화이트",
       "term": 7,
       "ice": true,
       "base": 61900,
@@ -815,7 +841,12 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 mini | 구독 | 셀프관리, 냉온정얼음, 애쉬 블루 | WPUIAC606SSB | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         21450,
+        23450,
+        25450,
         42900,
         61900
       ],
@@ -835,7 +866,7 @@
       "image": "02_data/assets/trimmed/G000069936.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069936",
-      "harvestedAt": "2026-10-27T21:42:44.963Z",
+      "harvestedAt": "2026-10-28T22:07:08.467Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -846,7 +877,7 @@
       "kind": "purifier",
       "care": "방문관리",
       "feature": "냉온정얼음",
-      "color": null,
+      "color": "내추럴 화이트",
       "term": 7,
       "ice": true,
       "base": 62900,
@@ -865,7 +896,12 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 mini | 구독 | 방문관리, 냉온정얼음, 애쉬 블루 | WPUIAC606SSB | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         21950,
+        23450,
+        25450,
         43900,
         62900
       ],
@@ -885,7 +921,7 @@
       "image": "02_data/assets/trimmed/G000069935.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069935",
-      "harvestedAt": "2026-10-27T21:42:51.165Z",
+      "harvestedAt": "2026-10-28T22:07:13.607Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -915,6 +951,11 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 | 구독 | 방문관리, 냉온정얼음, 뉴트럴 실버 | WPUIAC506SNS | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
+        25450,
         25950,
         51900,
         70900
@@ -935,7 +976,7 @@
       "image": "02_data/assets/trimmed/G000069848.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069848",
-      "harvestedAt": "2026-10-27T21:42:57.189Z",
+      "harvestedAt": "2026-10-28T22:07:18.965Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -965,6 +1006,10 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 | 구독 | 셀프관리, 냉온정얼음, 내추럴 화이트 | WPUIAC506SNW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
         25450,
         50900,
         69900
@@ -985,7 +1030,7 @@
       "image": "02_data/assets/trimmed/G000069847.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069847",
-      "harvestedAt": "2026-10-27T21:43:03.588Z",
+      "harvestedAt": "2026-10-28T22:07:24.277Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1015,6 +1060,10 @@
       "sizes": null,
       "title": "MEGA ICE 얼음정수기 | 구독 | 셀프관리, 냉온정얼음, 뉴트럴 실버 | WPUIAC506SNS | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
         25450,
         50900,
         69900
@@ -1035,7 +1084,7 @@
       "image": "02_data/assets/trimmed/G000069849.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069849",
-      "harvestedAt": "2026-10-27T21:43:09.612Z",
+      "harvestedAt": "2026-10-28T22:07:29.743Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1065,7 +1114,12 @@
       "sizes": null,
       "title": "투워터 정수기 | 구독 | 방문관리, 냉온정, 화이트 | WPUMAC306SWH | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         19450,
+        23450,
+        25450,
         38900,
         60900
       ],
@@ -1085,7 +1139,7 @@
       "image": "02_data/assets/trimmed/G000069843.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069843",
-      "harvestedAt": "2026-10-27T21:43:15.562Z",
+      "harvestedAt": "2026-10-28T22:07:35.059Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1115,7 +1169,11 @@
       "sizes": null,
       "title": "원코크 플러스 얼음물 정수기 | 구독 | 셀프관리, 냉온정얼음, 뉴트럴실버 | WPUIAC425SNS | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         64900
       ],
@@ -1135,7 +1193,7 @@
       "image": "02_data/assets/trimmed/G000069285.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069285",
-      "harvestedAt": "2026-10-27T21:43:21.594Z",
+      "harvestedAt": "2026-10-28T22:07:40.395Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1190,7 +1248,7 @@
       "image": "02_data/assets/trimmed/G000069284.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069284",
-      "harvestedAt": "2026-10-27T21:43:28.164Z",
+      "harvestedAt": "2026-10-28T22:07:46.051Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1220,7 +1278,11 @@
       "sizes": null,
       "title": "원코크 플러스 얼음물 정수기 | 구독 | 셀프관리, 냉온정얼음, 내추럴 화이트 | WPUIAC425SNW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         64900
       ],
@@ -1240,7 +1302,7 @@
       "image": "02_data/assets/trimmed/G000069283.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069283",
-      "harvestedAt": "2026-10-27T21:43:34.952Z",
+      "harvestedAt": "2026-10-28T22:07:52.007Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1270,7 +1332,12 @@
       "sizes": null,
       "title": "원코크 플러스 얼음물 정수기 | 구독 | 방문관리, 냉온정얼음, 내추럴 화이트 | WPUIAC425SNW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
         23950,
+        25450,
         47900,
         65900
       ],
@@ -1290,7 +1357,7 @@
       "image": "02_data/assets/trimmed/G000069282.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069282",
-      "harvestedAt": "2026-10-27T21:43:43.366Z",
+      "harvestedAt": "2026-10-28T22:07:59.492Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1345,7 +1412,7 @@
       "image": "02_data/assets/trimmed/G000069345.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069345",
-      "harvestedAt": "2026-10-27T21:43:49.134Z",
+      "harvestedAt": "2026-10-28T22:08:05.201Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1375,7 +1442,11 @@
       "sizes": null,
       "title": "PSG 원코크 플러스 얼음물 정수기 | 구독 | 셀프관리, 냉온정얼음, 내추럴 화이트 | WPUIAC425PPW | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         64900
       ],
@@ -1395,7 +1466,7 @@
       "image": "02_data/assets/trimmed/G000069346.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069346",
-      "harvestedAt": "2026-10-27T21:43:55.582Z",
+      "harvestedAt": "2026-10-28T22:08:10.580Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1425,7 +1496,12 @@
       "sizes": null,
       "title": "PSG 원코크 플러스 얼음물 정수기 | 구독 | 방문관리, 냉온정얼음, 뉴트럴실버 | WPUIAC425PNS | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
+        23450,
         23950,
+        25450,
         47900,
         65900
       ],
@@ -1445,7 +1521,7 @@
       "image": "02_data/assets/trimmed/G000069348.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069348",
-      "harvestedAt": "2026-10-27T21:44:02.050Z",
+      "harvestedAt": "2026-10-28T22:08:15.966Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1475,7 +1551,11 @@
       "sizes": null,
       "title": "PSG 원코크 플러스 얼음물 정수기 | 구독 | 셀프관리, 냉온정얼음, 뉴트럴실버 | WPUIAC425PNS | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
+        17950,
         23450,
+        25450,
         46900,
         64900
       ],
@@ -1495,7 +1575,7 @@
       "image": "02_data/assets/trimmed/G000069349.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069349",
-      "harvestedAt": "2026-10-27T21:44:08.104Z",
+      "harvestedAt": "2026-10-28T22:08:21.586Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1542,7 +1622,7 @@
       "image": "02_data/assets/trimmed/G000062320.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000062320",
-      "harvestedAt": "2026-10-27T21:44:13.614Z",
+      "harvestedAt": "2026-10-28T22:08:26.452Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1597,7 +1677,7 @@
       "image": "02_data/assets/trimmed/G000069985.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069985",
-      "harvestedAt": "2026-10-27T21:44:19.946Z",
+      "harvestedAt": "2026-10-28T22:08:32.629Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1652,7 +1732,7 @@
       "image": "02_data/assets/trimmed/G000069986.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069986",
-      "harvestedAt": "2026-10-27T21:44:25.347Z",
+      "harvestedAt": "2026-10-28T22:08:37.937Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1707,7 +1787,7 @@
       "image": "02_data/assets/trimmed/G000069988.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069988",
-      "harvestedAt": "2026-10-27T21:44:30.700Z",
+      "harvestedAt": "2026-10-28T22:08:43.276Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1762,7 +1842,7 @@
       "image": "02_data/assets/trimmed/G000069987.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069987",
-      "harvestedAt": "2026-10-27T21:44:36.577Z",
+      "harvestedAt": "2026-10-28T22:08:48.653Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1792,12 +1872,7 @@
       "sizes": null,
       "title": "초소형 직수 정수기 | 구독 | 셀프관리, 냉온정, 다크그레이 | WPUJAC104DDG | SK매직몰",
       "priceCandidates": [
-        9950,
-        13200,
         14200,
-        17950,
-        23450,
-        25450,
         28400,
         48900
       ],
@@ -1817,7 +1892,7 @@
       "image": "02_data/assets/trimmed/G000070012.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070012",
-      "harvestedAt": "2026-10-27T21:44:42.659Z",
+      "harvestedAt": "2026-10-28T22:08:53.844Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1872,7 +1947,7 @@
       "image": "02_data/assets/trimmed/G000070011.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070011",
-      "harvestedAt": "2026-10-27T21:44:48.502Z",
+      "harvestedAt": "2026-10-28T22:08:58.944Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1883,7 +1958,7 @@
       "kind": "purifier",
       "care": "셀프관리",
       "feature": "냉온정",
-      "color": "내추럴 화이트",
+      "color": null,
       "term": 7,
       "ice": false,
       "base": 48900,
@@ -1902,12 +1977,7 @@
       "sizes": null,
       "title": "초소형 직수 정수기 | 구독 | 셀프관리, 냉온정, 파스텔블루 | WPUJAC104DPB | SK매직몰",
       "priceCandidates": [
-        9950,
-        13200,
         14200,
-        17950,
-        23450,
-        25450,
         28400,
         48900
       ],
@@ -1927,7 +1997,7 @@
       "image": "02_data/assets/trimmed/G000070010.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070010",
-      "harvestedAt": "2026-10-27T21:44:54.482Z",
+      "harvestedAt": "2026-10-28T22:09:04.288Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -1982,7 +2052,7 @@
       "image": "02_data/assets/trimmed/G000070009.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070009",
-      "harvestedAt": "2026-10-27T21:45:00.153Z",
+      "harvestedAt": "2026-10-28T22:09:09.596Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2032,7 +2102,7 @@
       "image": "02_data/assets/trimmed/G000070008.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070008",
-      "harvestedAt": "2026-10-27T21:45:06.162Z",
+      "harvestedAt": "2026-10-28T22:09:14.846Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2087,7 +2157,7 @@
       "image": "02_data/assets/trimmed/G000070007.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070007",
-      "harvestedAt": "2026-10-27T21:45:12.078Z",
+      "harvestedAt": "2026-10-28T22:09:19.609Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2117,12 +2187,7 @@
       "sizes": null,
       "title": "초소형 직수 정수기 | 구독 | 셀프관리, 냉온정, 화이트 | WPUJAC104DWH | SK매직몰",
       "priceCandidates": [
-        9950,
-        13200,
         14200,
-        17950,
-        23450,
-        25450,
         28400,
         48900
       ],
@@ -2142,7 +2207,7 @@
       "image": "02_data/assets/trimmed/G000070006.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070006",
-      "harvestedAt": "2026-10-27T21:45:18.041Z",
+      "harvestedAt": "2026-10-28T22:09:24.516Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2189,7 +2254,7 @@
       "image": "02_data/assets/trimmed/G000069307.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069307",
-      "harvestedAt": "2026-10-27T21:45:22.886Z",
+      "harvestedAt": "2026-10-28T22:09:28.844Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2236,7 +2301,7 @@
       "image": "02_data/assets/trimmed/G000069303.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069303",
-      "harvestedAt": "2026-10-27T21:45:28.066Z",
+      "harvestedAt": "2026-10-28T22:09:33.181Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2283,7 +2348,7 @@
       "image": "02_data/assets/trimmed/G000069304.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069304",
-      "harvestedAt": "2026-10-27T21:45:33.687Z",
+      "harvestedAt": "2026-10-28T22:09:37.918Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2330,7 +2395,7 @@
       "image": "02_data/assets/trimmed/G000069361.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069361",
-      "harvestedAt": "2026-10-27T21:45:39.214Z",
+      "harvestedAt": "2026-10-28T22:09:42.683Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2377,7 +2442,7 @@
       "image": "02_data/assets/trimmed/G000069362.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069362",
-      "harvestedAt": "2026-10-27T21:45:44.710Z",
+      "harvestedAt": "2026-10-28T22:09:47.455Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2424,7 +2489,7 @@
       "image": "02_data/assets/trimmed/G000065040.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000065040",
-      "harvestedAt": "2026-10-27T21:45:49.645Z",
+      "harvestedAt": "2026-10-28T22:09:51.585Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2471,7 +2536,7 @@
       "image": "02_data/assets/trimmed/G000065042.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000065042",
-      "harvestedAt": "2026-10-27T21:45:55.159Z",
+      "harvestedAt": "2026-10-28T22:09:56.308Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2518,7 +2583,7 @@
       "image": "02_data/assets/trimmed/G000069305.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069305",
-      "harvestedAt": "2026-10-27T21:46:00.101Z",
+      "harvestedAt": "2026-10-28T22:10:01.075Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2565,7 +2630,7 @@
       "image": "02_data/assets/trimmed/G000069306.png",
       "category": "정수기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069306",
-      "harvestedAt": "2026-10-27T21:46:05.058Z",
+      "harvestedAt": "2026-10-28T22:10:05.463Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2619,7 +2684,7 @@
       "image": "02_data/assets/trimmed/G000069682.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069682",
-      "harvestedAt": "2026-10-27T21:46:10.874Z",
+      "harvestedAt": "2026-10-28T22:10:10.730Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2674,7 +2739,7 @@
       "image": "02_data/assets/trimmed/G000069681.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069681",
-      "harvestedAt": "2026-10-27T21:46:16.402Z",
+      "harvestedAt": "2026-10-28T22:10:15.678Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2729,7 +2794,7 @@
       "image": "02_data/assets/trimmed/G000069683.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069683",
-      "harvestedAt": "2026-10-27T21:46:22.271Z",
+      "harvestedAt": "2026-10-28T22:10:20.871Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2779,7 +2844,7 @@
       "image": "02_data/assets/trimmed/G000069142.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069142",
-      "harvestedAt": "2026-10-27T21:46:28.212Z",
+      "harvestedAt": "2026-10-28T22:10:25.759Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2828,7 +2893,7 @@
       "image": "02_data/assets/trimmed/G000067185.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067185",
-      "harvestedAt": "2026-10-27T21:46:34.138Z",
+      "harvestedAt": "2026-10-28T22:10:31.090Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2858,12 +2923,7 @@
       "sizes": null,
       "title": "22평 올클린 디아트 펫 공기청정기 | ALL | 셀프관리 , 실버 | ACL22P1CSKSL | SK매직몰",
       "priceCandidates": [
-        9950,
-        13200,
         13950,
-        17950,
-        23450,
-        25450,
         27900,
         40900
       ],
@@ -2882,7 +2942,7 @@
       "image": "02_data/assets/trimmed/G000067181.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067181",
-      "harvestedAt": "2026-10-27T21:46:40.616Z",
+      "harvestedAt": "2026-10-28T22:10:36.681Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2931,7 +2991,7 @@
       "image": "02_data/assets/trimmed/G000067189.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067189",
-      "harvestedAt": "2026-10-27T21:46:47.833Z",
+      "harvestedAt": "2026-10-28T22:10:42.549Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -2981,7 +3041,7 @@
       "image": "02_data/assets/trimmed/G000069143.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069143",
-      "harvestedAt": "2026-10-27T21:46:53.831Z",
+      "harvestedAt": "2026-10-28T22:10:48.841Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3011,7 +3071,12 @@
       "sizes": null,
       "title": "22평 올클린 디아트 공기청정기 | 구독 | 방문관리, 오트밀 베이지 | ACL22C1ASKOB | SK매직몰",
       "priceCandidates": [
+        9950,
+        13200,
         13950,
+        17950,
+        23450,
+        25450,
         27900,
         40900
       ],
@@ -3030,7 +3095,7 @@
       "image": "02_data/assets/trimmed/G000067184.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067184",
-      "harvestedAt": "2026-10-27T21:47:00.595Z",
+      "harvestedAt": "2026-10-28T22:10:53.689Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3060,13 +3125,8 @@
       "sizes": null,
       "title": "22평 올클린 디아트 공기청정기 | ALL | 셀프관리, 다크그린 | ACL22C2ASKZG | SK매직몰",
       "priceCandidates": [
-        9950,
         12450,
-        13200,
-        17950,
-        23450,
         24900,
-        25450,
         37900
       ],
       "promo": [
@@ -3084,7 +3144,7 @@
       "image": "02_data/assets/trimmed/G000067183.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067183",
-      "harvestedAt": "2026-10-27T21:47:07.455Z",
+      "harvestedAt": "2026-10-28T22:10:59.828Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3138,7 +3198,7 @@
       "image": "02_data/assets/trimmed/G000067182.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067182",
-      "harvestedAt": "2026-10-27T21:47:14.244Z",
+      "harvestedAt": "2026-10-28T22:11:05.761Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3191,7 +3251,7 @@
       "image": "02_data/assets/trimmed/G000067179.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067179",
-      "harvestedAt": "2026-10-27T21:47:21.248Z",
+      "harvestedAt": "2026-10-28T22:11:11.775Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3235,7 +3295,7 @@
       "image": "02_data/assets/trimmed/G000061081.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000061081",
-      "harvestedAt": "2026-10-27T21:47:28.202Z",
+      "harvestedAt": "2026-10-28T22:11:16.879Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3282,7 +3342,7 @@
       "image": "02_data/assets/trimmed/G000068762.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000068762",
-      "harvestedAt": "2026-10-27T21:47:33.685Z",
+      "harvestedAt": "2026-10-28T22:11:21.801Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3329,7 +3389,7 @@
       "image": "02_data/assets/trimmed/G000069281.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069281",
-      "harvestedAt": "2026-10-27T21:47:42.282Z",
+      "harvestedAt": "2026-10-28T22:11:28.362Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3383,7 +3443,7 @@
       "image": "02_data/assets/trimmed/G000067188.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067188",
-      "harvestedAt": "2026-10-27T21:47:48.235Z",
+      "harvestedAt": "2026-10-28T22:11:33.530Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3432,7 +3492,7 @@
       "image": "02_data/assets/trimmed/G000067187.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067187",
-      "harvestedAt": "2026-10-27T21:47:55.342Z",
+      "harvestedAt": "2026-10-28T22:11:39.787Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3462,12 +3522,7 @@
       "sizes": null,
       "title": "16평 올클린 디아트 공기청정기 | ALL | 방문관리, 다크그린 | ACL16C2ASKZG | SK매직몰",
       "priceCandidates": [
-        9950,
         12950,
-        13200,
-        17950,
-        23450,
-        25450,
         25900,
         38900
       ],
@@ -3486,7 +3541,7 @@
       "image": "02_data/assets/trimmed/G000067186.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067186",
-      "harvestedAt": "2026-10-27T21:48:01.710Z",
+      "harvestedAt": "2026-10-28T22:11:45.459Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3541,7 +3596,7 @@
       "image": "02_data/assets/trimmed/G000067380.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000067380",
-      "harvestedAt": "2026-10-27T21:48:08.420Z",
+      "harvestedAt": "2026-10-28T22:11:51.780Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3596,7 +3651,7 @@
       "image": "02_data/assets/trimmed/G000062559.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000062559",
-      "harvestedAt": "2026-10-27T21:48:14.348Z",
+      "harvestedAt": "2026-10-28T22:11:57.219Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3649,7 +3704,7 @@
       "image": "02_data/assets/trimmed/G000060125.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000060125",
-      "harvestedAt": "2026-10-27T21:48:20.838Z",
+      "harvestedAt": "2026-10-28T22:12:03.078Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3696,7 +3751,7 @@
       "image": "02_data/assets/trimmed/G000069343.png",
       "category": "공기청정기",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069343",
-      "harvestedAt": "2026-10-27T21:48:27.460Z",
+      "harvestedAt": "2026-10-28T22:12:08.623Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3707,7 +3762,7 @@
       "kind": "bidet",
       "care": "방문관리",
       "feature": null,
-      "color": null,
+      "color": "내추럴 화이트",
       "term": 5,
       "ice": false,
       "base": 26900,
@@ -3726,8 +3781,13 @@
       "sizes": null,
       "title": "올클린 케어 비데 | 구독 | 방문관리 | BIDS51DR15WH | SK매직몰",
       "priceCandidates": [
+        9950,
         11950,
+        13200,
+        17950,
+        23450,
         23900,
+        25450,
         26900
       ],
       "promo": [
@@ -3746,7 +3806,7 @@
       "image": "02_data/assets/trimmed/G000069623.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069623",
-      "harvestedAt": "2026-10-27T21:48:33.386Z",
+      "harvestedAt": "2026-10-28T22:12:14.062Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3798,7 +3858,7 @@
       "image": "02_data/assets/trimmed/G000066592.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000066592",
-      "harvestedAt": "2026-10-27T21:48:39.346Z",
+      "harvestedAt": "2026-10-28T22:12:19.323Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3825,13 +3885,8 @@
       "title": "풀스텐 케어 비데 | 구독 | Lite(방문주기12개월) | BIDS17DR64WH | SK매직몰",
       "priceCandidates": [
         7000,
-        9950,
-        13200,
         15900,
-        17950,
         22900,
-        23450,
-        25450,
         504000
       ],
       "promo": [
@@ -3850,7 +3905,7 @@
       "image": "02_data/assets/trimmed/G000068961.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000068961",
-      "harvestedAt": "2026-10-27T21:48:48.354Z",
+      "harvestedAt": "2026-10-28T22:12:26.788Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3877,13 +3932,8 @@
       "title": "위글위글 풀스텐 스파 비데 | ALL | Lite(방문주기12개월), FULL 스테인리스 노즐, 와이드좌욕. | BIDF17DR54WW | SK매직몰",
       "priceCandidates": [
         9000,
-        9950,
-        13200,
         15900,
-        17950,
-        23450,
         24900,
-        25450,
         540000
       ],
       "promo": [
@@ -3902,7 +3952,7 @@
       "image": "02_data/assets/trimmed/G000068781.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000068781",
-      "harvestedAt": "2026-10-27T21:48:54.342Z",
+      "harvestedAt": "2026-10-28T22:12:31.857Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3946,7 +3996,7 @@
       "image": "02_data/assets/trimmed/G000020604.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000020604",
-      "harvestedAt": "2026-10-27T21:48:59.319Z",
+      "harvestedAt": "2026-10-28T22:12:36.262Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -3998,7 +4048,7 @@
       "image": "02_data/assets/trimmed/G000069041.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069041",
-      "harvestedAt": "2026-10-27T21:49:05.255Z",
+      "harvestedAt": "2026-10-28T22:12:41.878Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4050,7 +4100,7 @@
       "image": "02_data/assets/trimmed/G000069136.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069136",
-      "harvestedAt": "2026-10-27T21:49:13.447Z",
+      "harvestedAt": "2026-10-28T22:12:48.896Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4102,7 +4152,7 @@
       "image": "02_data/assets/trimmed/G000069032.png",
       "category": "비데",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069032",
-      "harvestedAt": "2026-10-27T21:49:19.455Z",
+      "harvestedAt": "2026-10-28T22:12:54.269Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4157,7 +4207,7 @@
       "image": "02_data/assets/trimmed/G000069406.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069406",
-      "harvestedAt": "2026-10-27T21:49:25.449Z",
+      "harvestedAt": "2026-10-28T22:12:59.382Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4211,7 +4261,7 @@
       "image": "02_data/assets/trimmed/G000069422.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069422",
-      "harvestedAt": "2026-10-27T21:49:31.978Z",
+      "harvestedAt": "2026-10-28T22:13:04.898Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4242,8 +4292,13 @@
       "title": "워커힐 스탠다드 매트리스 | 구독 | (슈퍼싱글, 퀸) 셀프관리 | MATSM730RZOM | SK매직몰",
       "priceCandidates": [
         7950,
+        9950,
+        13200,
         15900,
-        20900
+        17950,
+        20900,
+        23450,
+        25450
       ],
       "promo": [
         "사은품",
@@ -4261,7 +4316,7 @@
       "image": "02_data/assets/trimmed/G000069429.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069429",
-      "harvestedAt": "2026-10-27T21:49:38.468Z",
+      "harvestedAt": "2026-10-28T22:13:10.380Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4316,7 +4371,7 @@
       "image": "02_data/assets/trimmed/G000069405.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069405",
-      "harvestedAt": "2026-10-27T21:49:44.698Z",
+      "harvestedAt": "2026-10-28T22:13:15.599Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4327,7 +4382,7 @@
       "kind": "bed",
       "care": "방문관리",
       "feature": null,
-      "color": null,
+      "color": "내추럴 화이트",
       "term": 7,
       "ice": false,
       "base": 28900,
@@ -4346,8 +4401,13 @@
       "sizes": null,
       "title": "워커힐 스위트 매트리스 | 구독 | (슈퍼싱글, 퀸, 킹) 방문관리 | MATSM230RSBR | SK매직몰",
       "priceCandidates": [
+        9950,
         11950,
+        13200,
+        17950,
+        23450,
         23900,
+        25450,
         28900
       ],
       "promo": [
@@ -4366,7 +4426,7 @@
       "image": "02_data/assets/trimmed/G000070071.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000070071",
-      "harvestedAt": "2026-10-27T21:49:51.224Z",
+      "harvestedAt": "2026-10-28T22:13:21.315Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4421,7 +4481,7 @@
       "image": "02_data/assets/trimmed/G000069421.png",
       "category": "매트리스",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069421",
-      "harvestedAt": "2026-10-27T21:49:57.288Z",
+      "harvestedAt": "2026-10-28T22:13:26.536Z",
       "needsPriceConfirm": false,
       "needsReview": false
     },
@@ -4471,7 +4531,7 @@
       "image": "02_data/assets/trimmed/G000069431.png",
       "category": "프레임",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069431",
-      "harvestedAt": "2026-10-27T21:50:02.784Z",
+      "harvestedAt": "2026-10-28T22:13:31.296Z",
       "needsPriceConfirm": false,
       "needsReview": true
     },
@@ -4521,7 +4581,7 @@
       "image": "02_data/assets/trimmed/G000069433.png",
       "category": "프레임",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069433",
-      "harvestedAt": "2026-10-27T21:50:07.837Z",
+      "harvestedAt": "2026-10-28T22:13:35.739Z",
       "needsPriceConfirm": false,
       "needsReview": true
     },
@@ -4571,7 +4631,7 @@
       "image": "02_data/assets/trimmed/G000069442.png",
       "category": "프레임",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069442",
-      "harvestedAt": "2026-10-27T21:50:12.967Z",
+      "harvestedAt": "2026-10-28T22:13:39.892Z",
       "needsPriceConfirm": false,
       "needsReview": true
     },
@@ -4621,7 +4681,7 @@
       "image": "02_data/assets/trimmed/G000069439.png",
       "category": "프레임",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069439",
-      "harvestedAt": "2026-10-27T21:50:17.943Z",
+      "harvestedAt": "2026-10-28T22:13:44.455Z",
       "needsPriceConfirm": false,
       "needsReview": true
     },
@@ -4671,7 +4731,7 @@
       "image": "02_data/assets/trimmed/G000069436.png",
       "category": "프레임",
       "sourceUrl": "https://www.skmagic.com/goods/indexGoodsDetail?goodsId=G000069436",
-      "harvestedAt": "2026-10-27T21:50:23.121Z",
+      "harvestedAt": "2026-10-28T22:13:48.854Z",
       "needsPriceConfirm": false,
       "needsReview": true
     }
