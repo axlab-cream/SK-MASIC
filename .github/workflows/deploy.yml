@@ -1,0 +1,47 @@
+# Vercel 배포 (axlab 팀 토큰) — push 권한만 있으면 누구나 배포
+# - 이 레포와 연결된 Vercel 프로젝트를 자동으로 찾음 (프로젝트 이름 입력 불필요)
+# - 기본 브랜치 push = Production, 그 외 브랜치 = Preview
+# - 필요: 레포 Secret VERCEL_TOKEN
+name: Deploy to Vercel
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  VERCEL_ORG_ID: team_l0ovcxd3Fv5NvzWfI2ltgPsA
+  # Git 연결이 없는 프로젝트만 이름을 직접 지정 (비워두면 자동 탐색)
+  VERCEL_PROJECT_NAME: ""
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: vercel-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find Vercel project
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          [ -z "$VERCEL_TOKEN" ] && { echo "::error::레포 Secret VERCEL_TOKEN이 없습니다"; exit 1; }
+          API="https://api.vercel.com"; AUTH="Authorization: Bearer $VERCEL_TOKEN"
+          if [ -n "$VERCEL_PROJECT_NAME" ]; then
+            ID=$(curl -fsS -H "$AUTH" "$API/v9/projects/$VERCEL_PROJECT_NAME?teamId=$VERCEL_ORG_ID" | jq -r '.id // empty')
+          else
+            ID=$(curl -fsS -H "$AUTH" "$API/v9/projects?teamId=$VERCEL_ORG_ID&repoUrl=https://github.com/$GITHUB_REPOSITORY" | jq -r '.projects[0].id // empty')
+          fi
+          [ -z "$ID" ] && { echo "::error::이 레포와 연결된 Vercel 프로젝트를 찾지 못했습니다. VERCEL_PROJECT_NAME을 지정하세요"; exit 1; }
+          echo "VERCEL_PROJECT_ID=$ID" >> "$GITHUB_ENV"
+          echo "Vercel project: $ID"
+
+      - name: Deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ "$GITHUB_REF_NAME" = "${{ github.event.repository.default_branch }}" ]; then T="--prod"; K=Production; else T=""; K=Preview; fi
+          URL=$(npx --yes vercel@latest deploy $T --yes --token "$VERCEL_TOKEN")
+          echo "### Vercel $K: $URL (by @$GITHUB_ACTOR)" >> "$GITHUB_STEP_SUMMARY"
